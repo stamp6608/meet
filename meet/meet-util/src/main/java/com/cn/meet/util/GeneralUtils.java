@@ -26,7 +26,7 @@ public class GeneralUtils {
      * @Date: 2019/3/21
      */
     public static Object mapperParams(BodyRequestWrapper requestWrapper, Class clazz) throws GeneralException{
-        String paramStr = requestWrapper.getParameterMap().get("paramStr")[0];
+        String paramStr = requestWrapper.getDecryptJson();
         Object obj = JSON.parseObject(paramStr, clazz);
         //必填参数校验
         checkParams(obj);

@@ -59,18 +59,19 @@ public class RequestWrapperFilter implements Filter {
         String json = requestWrapper.getJson();
         if(StringUtils.isBlank(json))
             throw new GeneralException(Constant.PARAMETER_CHECK_ERROR, StatusCode.PARAMETER_CHECK_ERROR);
-        logger.info(" 解密前参数: {} ",json);
+        logger.info("<<< 解密前参数: {} >>>",json);
         String paramStr;
         try{
             //参数解密
             paramStr = AesEncryptUtils.decrypt(json);
+            logger.info("<<< 解密后参数：{} >>>", paramStr);
         }catch (Exception e){
             logger.error("参数解密失败... json:{}",json);
             throw new GeneralException(Constant.DECRYPT_ERROR, StatusCode.DECRYPT_ERROR);
         }
         //todo 待手机号校验...
 
-        requestWrapper.getParameterMap().put("paramStr",new String[]{paramStr});
+        requestWrapper.setDecryptJson(paramStr);
         chain.doFilter(requestWrapper, response);
     }
 

@@ -19,18 +19,6 @@ public class AesEncryptUtils {
     private static final String ALGORITHMSTR = "AES/ECB/PKCS5Padding";
 
     /**
-     * @Description: 生成16位的密钥
-     * @Param: []
-     * @return: java.lang.String
-     * @Author: Stamp.M
-     * @Date: 2019/3/21
-     */
-    private static String buildSecurityKey() {
-        String key = MD5Utils.encodeByMD5(Constant.SECURITY_KEY);
-        return key.substring(3, 18);
-    }
-
-    /**
      * @Description: 加密
      * @Param: [content]
      * @return: java.lang.String
@@ -38,7 +26,7 @@ public class AesEncryptUtils {
      * @Date: 2019/3/21
      */
     public static String encrypt(String content) throws Exception {
-        String encryptKey = buildSecurityKey();
+        String encryptKey = Constant.SECURITY_KEY;
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
         kgen.init(128);
         Cipher cipher = Cipher.getInstance(ALGORITHMSTR);
@@ -57,7 +45,7 @@ public class AesEncryptUtils {
      * @Date: 2019/3/21
      */
     public static String decrypt(String encryptStr) throws Exception {
-        String decryptKey = buildSecurityKey();
+        String decryptKey = Constant.SECURITY_KEY;
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
         kgen.init(128);
         Cipher cipher = Cipher.getInstance(ALGORITHMSTR);

@@ -11,7 +11,7 @@ public class Constant {
     //正常响应信息
     public static final String SUCCESS_MSG="success";
     //系统加密密钥
-    public static final String SECURITY_KEY="Vo^UIwl@Lp5y%tgwkwNL";
+    public static final String SECURITY_KEY="Vo^UIwl@Lp5y%tgw";
     //参数解密失败
     public static final String DECRYPT_ERROR="参数解密失败";
     //参数校验失败
