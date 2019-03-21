@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="meet-web:war">
-    <output-path>$PROJECT_DIR$/meet-web/target</output-path>
-    <root id="archive" name="meet-web-1.0.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="meet-web:war exploded" />
-    </root>
-  </artifact>
-</component>
