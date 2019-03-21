@@ -3,8 +3,7 @@ package com.cn.meet.common;
 
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
-import com.cn.meet.model.common.Constant;
-import com.cn.meet.model.common.StatusCode;
+import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.util.AesEncryptUtils;
 import com.cn.meet.util.IPUtils;
 import com.google.common.collect.ImmutableList;
@@ -51,14 +50,14 @@ public class RequestWrapperFilter implements Filter {
             //仅支持POST请求格式
             if(!StringUtils.equals(methodType,"POST")){
                 logger.error("不支持的请求方法: {}", methodType);
-                return;
+                throw new GeneralException(ResponseCodeEnum.NON_SUPPORT_TYPE.getMessage(), ResponseCodeEnum.NON_SUPPORT_TYPE.getCode());
             }
             requestWrapper = new BodyRequestWrapper((HttpServletRequest) request);
             if(requestWrapper == null) return;
         }
         String json = requestWrapper.getJson();
         if(StringUtils.isBlank(json))
-            throw new GeneralException(Constant.PARAMETER_CHECK_ERROR, StatusCode.PARAMETER_CHECK_ERROR);
+            throw new GeneralException(ResponseCodeEnum.DECRYPT_ERROR.getMessage(), ResponseCodeEnum.DECRYPT_ERROR.getCode());
         logger.info("<<< 解密前参数: {} >>>",json);
         String paramStr;
         try{
@@ -67,7 +66,7 @@ public class RequestWrapperFilter implements Filter {
             logger.info("<<< 解密后参数：{} >>>", paramStr);
         }catch (Exception e){
             logger.error("参数解密失败... json:{}",json);
-            throw new GeneralException(Constant.DECRYPT_ERROR, StatusCode.DECRYPT_ERROR);
+            throw new GeneralException(ResponseCodeEnum.DECRYPT_ERROR.getMessage(), ResponseCodeEnum.DECRYPT_ERROR.getCode());
         }
         //todo 待手机号校验...
 

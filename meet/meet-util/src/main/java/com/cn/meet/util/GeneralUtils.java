@@ -4,8 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.cn.meet.annotations.ParamCheck;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
-import com.cn.meet.model.common.Constant;
-import com.cn.meet.model.common.StatusCode;
+import com.cn.meet.enums.ResponseCodeEnum;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
@@ -52,10 +51,10 @@ public class GeneralUtils {
                         // 获取属性值
                         String val = (String) field.get(obj);
                         if (StringUtils.isBlank(val))
-                            throw new GeneralException(Constant.PARAMETER_CHECK_ERROR, StatusCode.PARAMETER_CHECK_ERROR);
+                            throw new GeneralException(ResponseCodeEnum.PARAMETER_CHECK_ERROR.getMessage(), ResponseCodeEnum.PARAMETER_CHECK_ERROR.getCode());
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
-                        throw new GeneralException(Constant.PARAMETER_CHECK_ERROR, StatusCode.PARAMETER_CHECK_ERROR);
+                        throw new GeneralException(ResponseCodeEnum.PARAMETER_CHECK_ERROR.getMessage(), ResponseCodeEnum.PARAMETER_CHECK_ERROR.getCode());
                     }
                 }
             }

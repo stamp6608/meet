@@ -1,5 +1,7 @@
 package com.cn.meet.model.common;
 
+import com.cn.meet.enums.ResponseCodeEnum;
+
 /**
  * @program: meet
  * @description: 一般响应类
@@ -23,7 +25,7 @@ public class ResponseEntity {
     }
 
     public static ResponseEntity initResponse(){
-        return new ResponseEntity(StatusCode.SUCCESS_CODE, Constant.SUCCESS_MSG);
+        return new ResponseEntity(ResponseCodeEnum.SUCCESS_CODE.getCode(), ResponseCodeEnum.SUCCESS_CODE.getMessage());
     }
 
 

@@ -1,13 +1,12 @@
-package com.cn.meet.Exception;
+package com.cn.meet.exception;
 
-import com.cn.meet.exception.GeneralException;
+import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.model.common.ResponseEntity;
-import com.cn.meet.model.common.StatusCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author: Stamp.M
  * @create: 2019-03-19 22:22
  **/
-@RestControllerAdvice
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
@@ -33,7 +32,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity exceptionHandler(HttpServletRequest httpServletRequest, Exception e) {
         logger.error("服务错误:", e.getMessage());
-        return new ResponseEntity(StatusCode.INNER_ERROR, "服务出错");
+        return new ResponseEntity(ResponseCodeEnum.INNER_ERROR.getCode(), ResponseCodeEnum.INNER_ERROR.getMessage());
     }
 
     /**
