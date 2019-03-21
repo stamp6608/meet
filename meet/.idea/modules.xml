@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/meet.iml" filepath="$PROJECT_DIR$/meet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meet-api/meet-api.iml" filepath="$PROJECT_DIR$/meet-api/meet-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meet-util/meet-util.iml" filepath="$PROJECT_DIR$/meet-util/meet-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meet-web/meet-web.iml" filepath="$PROJECT_DIR$/meet-web/meet-web.iml" />
+    </modules>
+  </component>
+</project>
