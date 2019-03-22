@@ -1,8 +1,7 @@
 package com.cn.meet.advice;
 
 import com.cn.meet.annotations.SecurityParameter;
-import com.cn.meet.util.AesEncryptUtils;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.cn.meet.util.GeneralUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
@@ -39,14 +38,7 @@ public class EncodeResponseAdvice implements ResponseBodyAdvice {
         }
         if (encode) {
             logger.info("对方法method :【" + methodParameter.getMethod().getName() + "】返回数据进行加密");
-            ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                String result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(body);
-                return AesEncryptUtils.encrypt(result);
-            } catch (Exception e) {
-                e.printStackTrace();
-                logger.error("对方法method :【" + methodParameter.getMethod().getName() + "】返回数据进行解密出现异常："+e.getMessage());
-            }
+            return GeneralUtils.encryptRes(body);
         }
         return body;
     }

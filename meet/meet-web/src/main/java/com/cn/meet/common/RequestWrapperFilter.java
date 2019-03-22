@@ -1,9 +1,9 @@
 package com.cn.meet.common;
 
 
-import com.cn.meet.exception.GeneralException;
-import com.cn.meet.handler.BodyRequestWrapper;
 import com.cn.meet.enums.ResponseCodeEnum;
+import com.cn.meet.handler.BodyRequestWrapper;
+import com.cn.meet.model.common.Constant;
 import com.cn.meet.util.AesEncryptUtils;
 import com.cn.meet.util.IPUtils;
 import com.google.common.collect.ImmutableList;
@@ -37,7 +37,7 @@ public class RequestWrapperFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, GeneralException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         BodyRequestWrapper requestWrapper = null;
         if (request instanceof HttpServletRequest) {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -47,17 +47,22 @@ public class RequestWrapperFilter implements Filter {
             // 获取请求全IP地址
             String ip = IPUtils.getRealIp((HttpServletRequest)request);
             logger.info(" HttpServletRequest: IP:{}, MethodType:{}, ServletPath:{}", ip, methodType, servletPath);
+            requestWrapper = new BodyRequestWrapper((HttpServletRequest) request);
+            if(requestWrapper == null) return;
             //仅支持POST请求格式
             if(!StringUtils.equals(methodType,"POST")){
                 logger.error("不支持的请求方法: {}", methodType);
-                throw new GeneralException(ResponseCodeEnum.NON_SUPPORT_TYPE.getMessage(), ResponseCodeEnum.NON_SUPPORT_TYPE.getCode());
+                requestWrapper.getSession().setAttribute(Constant.ERROR_SESSION_ENUM, ResponseCodeEnum.NON_SUPPORT_TYPE);
+                requestWrapper.getRequestDispatcher("/error/msg").forward(requestWrapper,response);
+                return;
             }
-            requestWrapper = new BodyRequestWrapper((HttpServletRequest) request);
-            if(requestWrapper == null) return;
         }
         String json = requestWrapper.getJson();
-        if(StringUtils.isBlank(json))
-            throw new GeneralException(ResponseCodeEnum.DECRYPT_ERROR.getMessage(), ResponseCodeEnum.DECRYPT_ERROR.getCode());
+        if(StringUtils.isBlank(json)){
+            requestWrapper.getSession().setAttribute(Constant.ERROR_SESSION_ENUM, ResponseCodeEnum.DECRYPT_ERROR);
+            requestWrapper.getRequestDispatcher("/error/msg").forward(requestWrapper,response);
+            return;
+        }
         logger.info("<<< 解密前参数: {} >>>",json);
         String paramStr;
         try{
@@ -66,7 +71,9 @@ public class RequestWrapperFilter implements Filter {
             logger.info("<<< 解密后参数：{} >>>", paramStr);
         }catch (Exception e){
             logger.error("参数解密失败... json:{}",json);
-            throw new GeneralException(ResponseCodeEnum.DECRYPT_ERROR.getMessage(), ResponseCodeEnum.DECRYPT_ERROR.getCode());
+            requestWrapper.getSession().setAttribute(Constant.ERROR_SESSION_ENUM, ResponseCodeEnum.DECRYPT_ERROR);
+            requestWrapper.getRequestDispatcher("/error/msg").forward(requestWrapper,response);
+            return;
         }
         //todo 待手机号校验...
 

@@ -5,6 +5,7 @@ import com.cn.meet.annotations.ParamCheck;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
 import com.cn.meet.enums.ResponseCodeEnum;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
@@ -24,7 +25,7 @@ public class GeneralUtils {
      * @Author: Stamp.M
      * @Date: 2019/3/21
      */
-    public static Object mapperParams(BodyRequestWrapper requestWrapper, Class clazz) throws GeneralException{
+    public static Object mapperParams(BodyRequestWrapper requestWrapper, Class clazz) throws GeneralException {
         String paramStr = requestWrapper.getDecryptJson();
         Object obj = JSON.parseObject(paramStr, clazz);
         //必填参数校验
@@ -39,7 +40,7 @@ public class GeneralUtils {
      * @Author: Stamp.M
      * @Date: 2019/3/21
      */
-    public static void checkParams(Object obj) throws GeneralException{
+    public static void checkParams(Object obj) throws GeneralException {
         Class clz = obj.getClass();
         Field[] fields = clz.getDeclaredFields();
         for (Field field : fields) {
@@ -59,5 +60,24 @@ public class GeneralUtils {
                 }
             }
         }
+    }
+
+    /**
+     * @Description: 对响应的对象加密处理
+     * @Param: [obj]
+     * @return: java.lang.String
+     * @Author: Stamp.M
+     * @Date: 2019/3/22
+     */
+    public static String encryptRes(Object obj) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String result = "";
+        try {
+            String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+            result = AesEncryptUtils.encrypt(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

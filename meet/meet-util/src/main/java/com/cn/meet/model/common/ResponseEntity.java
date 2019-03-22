@@ -13,21 +13,24 @@ public class ResponseEntity {
     private String message;
     private Object data;
 
-    public ResponseEntity(Integer code, String message){
+    public ResponseEntity(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public ResponseEntity(Integer code, String message, Object data){
+    public ResponseEntity(Integer code, String message, Object data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public static ResponseEntity initResponse(){
+    public static ResponseEntity initResponse() {
         return new ResponseEntity(ResponseCodeEnum.SUCCESS_CODE.getCode(), ResponseCodeEnum.SUCCESS_CODE.getMessage());
     }
 
+    public static ResponseEntity initErrorResponseEntity(ResponseCodeEnum responseCodeEnum) {
+        return new ResponseEntity(responseCodeEnum.getCode(), responseCodeEnum.getMessage());
+    }
 
     public Integer getCode() {
         return code;

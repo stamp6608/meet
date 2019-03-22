@@ -1,5 +1,7 @@
 package com.cn.meet.exception;
 
+import com.cn.meet.enums.ResponseCodeEnum;
+
 /**
  * @program: meet
  * @description: 自定义异常
@@ -12,6 +14,15 @@ public class GeneralException extends RuntimeException {
     public GeneralException(String message, Integer code) {
         super(message);
         this.code = code;
+    }
+
+    public GeneralException(ResponseCodeEnum responseCodeEnum) {
+        super(responseCodeEnum.getMessage());
+        this.code = responseCodeEnum.getCode();
+    }
+
+    public static GeneralException initEnumGeneralException(ResponseCodeEnum responseCodeEnum) {
+        return new GeneralException(responseCodeEnum.getMessage(), responseCodeEnum.getCode());
     }
 
     public Integer getCode() {

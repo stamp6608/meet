@@ -2,6 +2,7 @@ package com.cn.meet.exception;
 
 import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.model.common.ResponseEntity;
+import com.cn.meet.util.GeneralUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,25 +27,26 @@ public class GlobalExceptionHandler {
      *
      * @param httpServletRequest httpServletRequest
      * @param e                  异常
-     * @return
+     * @return 异常数据加密串
      */
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity exceptionHandler(HttpServletRequest httpServletRequest, Exception e) {
+    public String exceptionHandler(HttpServletRequest httpServletRequest, Exception e) {
         logger.error("服务错误:", e.getMessage());
-        return new ResponseEntity(ResponseCodeEnum.INNER_ERROR.getCode(), ResponseCodeEnum.INNER_ERROR.getMessage());
+        return GeneralUtils.encryptRes(ResponseEntity.initErrorResponseEntity(ResponseCodeEnum.INNER_ERROR));
     }
 
     /**
      * 处理 GeneralException 异常
+     *
      * @param httpServletRequest httpServletRequest
-     * @param e 异常
-     * @return ResponseEntity
+     * @param e                  异常
+     * @return 异常数据加密串
      */
     @ResponseBody
     @ExceptionHandler(value = GeneralException.class)
-    public ResponseEntity businessExceptionHandler(HttpServletRequest httpServletRequest, GeneralException e) {
+    public String businessExceptionHandler(HttpServletRequest httpServletRequest, GeneralException e) {
         logger.info("业务处理异常...code : " + e.getCode() + "; msg:" + e.getMessage());
-        return new ResponseEntity(e.getCode(), e.getMessage());
+        return GeneralUtils.encryptRes(new ResponseEntity(e.getCode(), e.getMessage()));
     }
 }
