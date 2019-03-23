@@ -11,6 +11,8 @@ public class Constant {
     public static final String SECURITY_KEY="Vo^UIwl@Lp5y%tgw";
     //错误响应枚举
     public static final String ERROR_SESSION_ENUM="errorSessionEnum";
+    //常用数据分隔符
+    public static final String SPLIT_STR="@685@";
 
 
 }

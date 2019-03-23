@@ -77,7 +77,17 @@ public class UserInfoReq {
     private int createTime;
     //修改时间
     private int updateTime;
+    //注册IP
+    private String ip;
 
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
     public int getCreateTime() {
         return createTime;

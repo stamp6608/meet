@@ -10,6 +10,7 @@ import com.cn.meet.req.oracle.UserInfoReq;
 import com.cn.meet.service.UserService;
 import com.cn.meet.util.DateUtils;
 import com.cn.meet.util.GeneralUtils;
+import com.cn.meet.util.IPUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,7 @@ public class UserController {
         //手机号是否注册过验证
         if (userService.checkPhone(phone.getTelephone()))
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PARAMETER_CHECK_ERROR);
+
         //todo 向手机短信验证平台获取短信验证码(此处暂时先留白，具体后面接入短信平台)
         //模拟获取短信验证码为 73748332；
         String verificationCode = "73748332";
@@ -76,8 +78,13 @@ public class UserController {
         if(StringUtils.isBlank(verifyCode) || StringUtils.isBlank(code)
                 || !StringUtils.equals(verifyCode, code))
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHONE_VERIFY_ERROR);
+        //手机号是否注册过验证
+        if (userService.checkPhone(phone.getTelephone()))
+            throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PARAMETER_CHECK_ERROR);
         //保存手机信息
         userService.savePhoneVerify(phone);
+        //销毁短信验证码
+        request.getSession().removeAttribute(phone.getTelephone());
         return ResponseEntity.initResponse();
     }
 
@@ -98,6 +105,8 @@ public class UserController {
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.ALIAS_NAME_ERROR);
         user.setCreateTime(DateUtils.getSecondTimestamp(new Date()));
         user.setUpdateTime(0);
+        String ip= IPUtils.getRealIp(request, 0);
+        user.setIp(ip);
         userService.saveUserInfo(user);
         return ResponseEntity.initResponse();
     }

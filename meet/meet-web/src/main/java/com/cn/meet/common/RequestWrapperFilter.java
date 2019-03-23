@@ -45,7 +45,7 @@ public class RequestWrapperFilter implements Filter {
             String methodType = httpRequest.getMethod();
             String servletPath = httpRequest.getRequestURI().toString();
             // 获取请求全IP地址
-            String ip = IPUtils.getRealIp((HttpServletRequest)request);
+            String ip = IPUtils.getRealIp((HttpServletRequest)request, 1);
             logger.info(" HttpServletRequest: IP:{}, MethodType:{}, ServletPath:{}", ip, methodType, servletPath);
             requestWrapper = new BodyRequestWrapper((HttpServletRequest) request);
             if(requestWrapper == null) return;

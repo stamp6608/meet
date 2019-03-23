@@ -12,12 +12,12 @@ public class IPUtils {
 
     /**
      * @Description: 获取Request的IP地址（全IP地址）
-     * @Param: [request]
+     * @Param: [request, isFull]
      * @return: java.lang.String
      * @Author: Stamp.M
      * @Date: 2019/3/21
      */
-    public static String getRealIp(HttpServletRequest request) {
+    public static String getRealIp(HttpServletRequest request, int isFull) {
         // 这个一般是Nginx反向代理设置的参数
         String ip = request.getHeader("X-Real-IP");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
@@ -32,11 +32,10 @@ public class IPUtils {
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
-        // 处理多IP的情况（只取第一个IP）
-       /* if (ip != null && ip.contains(",")) {
+        if (isFull == 0 && ip != null && ip.contains(",")) {
             String[] ipArray = ip.split(",");
             ip = ipArray[0];
-        }*/
+        }
         return ip;
     }
 
