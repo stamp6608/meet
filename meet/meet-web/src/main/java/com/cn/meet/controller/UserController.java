@@ -4,6 +4,7 @@ import com.cn.meet.annotations.SecurityParameter;
 import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
+import com.cn.meet.model.common.ResponseEntity;
 import com.cn.meet.req.oracle.PhoneInfoReq;
 import com.cn.meet.req.oracle.UserInfoReq;
 import com.cn.meet.service.UserService;
@@ -47,7 +48,7 @@ public class UserController {
         PhoneInfoReq phone = (PhoneInfoReq) GeneralUtils.mapperParams(request, PhoneInfoReq.class);
         //手机号是否注册过验证
         if (userService.checkPhone(phone.getTelephone()))
-            throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PARAMETER_CHECK_ERROR);
+            throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHNOE_EXIST_ERROR);
 
         //todo 向手机短信验证平台获取短信验证码(此处暂时先留白，具体后面接入短信平台)
         //模拟获取短信验证码为 73748332；
@@ -77,9 +78,6 @@ public class UserController {
         if(StringUtils.isBlank(verifyCode) || StringUtils.isBlank(code)
                 || !StringUtils.equals(verifyCode, code))
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHONE_VERIFY_ERROR);
-        //手机号是否注册过验证
-        if (userService.checkPhone(phone.getTelephone()))
-            throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PARAMETER_CHECK_ERROR);
         //保存手机信息
         userService.savePhoneVerify(phone);
         //销毁短信验证码

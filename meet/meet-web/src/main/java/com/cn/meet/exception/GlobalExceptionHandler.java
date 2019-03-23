@@ -1,6 +1,7 @@
 package com.cn.meet.exception;
 
 import com.cn.meet.enums.ResponseCodeEnum;
+import com.cn.meet.model.common.ResponseEntity;
 import com.cn.meet.util.GeneralUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
