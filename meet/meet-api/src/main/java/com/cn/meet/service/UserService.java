@@ -62,9 +62,12 @@ public class UserService {
     * @return: void 
     * @Author: Stamp.M 
     * @Date: 2019/3/23 
-    */ 
+    */
+    @Transactional
     public void saveUserInfo(UserInfoReq userInfoReq) throws GeneralException{
         Integer res = userMapper.saveUserInfo(userInfoReq);
         if(res != 1) throw GeneralException.initEnumGeneralException(ResponseCodeEnum.INNER_ERROR);
     }
+
+
 }
