@@ -60,13 +60,13 @@ public class UserController {
     }
 
 
-    /** 
-    * @Description: 手机短信验证码验证
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/3/23 
-    */ 
+    /**
+     * @Description: 手机短信验证码验证
+     * @Param: [request]
+     * @return: com.cn.meet.model.common.ResponseEntity
+     * @Author: Stamp.M
+     * @Date: 2019/3/23
+     */
     @SecurityParameter
     @PostMapping("/vCode")
     @ResponseBody
@@ -75,9 +75,9 @@ public class UserController {
         String verifyCode = phone.getVerifyCode();
         Object obj = request.getSession().getAttribute(phone.getTelephone());
         String code = Optional.ofNullable(obj)
-                .map(a-> String.valueOf(a))
+                .map(a -> String.valueOf(a))
                 .orElse("");
-        if(StringUtils.isBlank(verifyCode) || StringUtils.isBlank(code)
+        if (StringUtils.isBlank(verifyCode) || StringUtils.isBlank(code)
                 || !StringUtils.equals(verifyCode, code))
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHONE_VERIFY_ERROR);
         //保存手机信息
@@ -87,43 +87,43 @@ public class UserController {
         return ResponseEntity.initResponse();
     }
 
-    /** 
-    * @Description: 用户信息注册
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/3/23 
-    */ 
+    /**
+     * @Description: 用户信息注册
+     * @Param: [request]
+     * @return: com.cn.meet.model.common.ResponseEntity
+     * @Author: Stamp.M
+     * @Date: 2019/3/23
+     */
     @SecurityParameter
     @PostMapping("/rUser")
     @ResponseBody
     public ResponseEntity registUser(BodyRequestWrapper request) throws GeneralException {
         UserInfoReq user = (UserInfoReq) GeneralUtils.mapperParams(request, UserInfoReq.class);
         //别名重复性校验
-        if(userService.checkAliasName(user.getAliasName()))
+        if (userService.checkAliasName(user.getAliasName()))
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.ALIAS_NAME_ERROR);
         user.setCreateTime(DateUtils.getSecondTimestamp(new Date()));
         user.setUpdateTime(0);
-        String ip= IPUtils.getRealIp(request, 0);
+        String ip = IPUtils.getRealIp(request, 0);
         user.setIp(ip);
         userService.saveUserInfo(user);
         return ResponseEntity.initResponse();
     }
 
 
-    /** 
-    * @Description: 查询用户个人信息
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/3/23 
-    */ 
+    /**
+     * @Description: 查询用户个人信息
+     * @Param: [request]
+     * @return: com.cn.meet.model.common.ResponseEntity
+     * @Author: Stamp.M
+     * @Date: 2019/3/23
+     */
     @SecurityParameter
     @PostMapping("/info")
     @ResponseBody
     public ResponseEntity userInfo(BodyRequestWrapper request) throws GeneralException {
         UserInfo2Req userReq = (UserInfo2Req) GeneralUtils.mapperParams(request, UserInfo2Req.class);
-        UserInfoEntity user  = userService.getUserInfo(userReq);
+        UserInfoEntity user = userService.getUserInfo(userReq);
         return ResponseEntity.initSuccessResponse(user);
     }
 
