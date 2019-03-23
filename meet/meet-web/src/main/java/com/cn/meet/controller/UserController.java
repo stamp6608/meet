@@ -112,7 +112,7 @@ public class UserController {
 
 
     /** 
-    * @Description: 查询用户信息
+    * @Description: 查询用户个人信息
     * @Param: [request] 
     * @return: com.cn.meet.model.common.ResponseEntity 
     * @Author: Stamp.M 
