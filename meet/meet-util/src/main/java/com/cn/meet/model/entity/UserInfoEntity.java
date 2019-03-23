@@ -1,6 +1,6 @@
-package com.cn.meet.model.oracle;
+package com.cn.meet.model.entity;
 
-import java.io.Serializable;
+import com.cn.meet.annotations.ParamCheck;
 
 /**
  * @program: meet
@@ -8,52 +8,110 @@ import java.io.Serializable;
  * @author: Stamp.M
  * @create: 2019-03-16 20:21
  **/
-public class UserInfoEntity implements Serializable{
-
-    private static final long serialVersionUID = -6755109334285750657L;
-
+public class UserInfoEntity {
     //手机号，唯一标识
+    @ParamCheck
     private String telephone;
     //语言
+    @ParamCheck
     private String language;
     //国家
+    @ParamCheck
     private String country;
     //别名
+    @ParamCheck
     private String aliasName;
     //生日
+    @ParamCheck
     private String birthday;
     //身高/体重
+    @ParamCheck
     private String weight;
     //性别
+    @ParamCheck
     private String sex;
     //体型
+    @ParamCheck
     private String shape;
     //种族
+    @ParamCheck
     private String race;
     //情感状况
+    @ParamCheck
     private String emotion;
     //自我介绍
     private String selfIntroduction;
     //期待类型
+    @ParamCheck
     private String expectType;
     //期待约会性别
+    @ParamCheck
     private String expectSex;
     //期待约会体型
+    @ParamCheck
     private String expectShape;
     //期待约会种族
+    @ParamCheck
     private String expectRace;
     //期待约会年龄
+    @ParamCheck
     private String expectAge;
     //爱好
+    @ParamCheck
     private String hobby;
     //宗教
+    @ParamCheck
     private String religion;
     //教育
+    @ParamCheck
     private String edutication;
     //吸烟/喝酒
+    @ParamCheck
     private String smoke;
     //是否期待小孩
+    @ParamCheck
     private String hasBaby;
+    //图片地址
+    private String imgPath;
+    //创建时间
+    private int createTime;
+    //修改时间
+    private int updateTime;
+    //注册IP
+    private String ip;
+
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public int getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(int createTime) {
+        this.createTime = createTime;
+    }
+
+    public int getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(int updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
 
     public String getExpectShape() {
         return expectShape;

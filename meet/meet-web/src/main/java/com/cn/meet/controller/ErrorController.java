@@ -5,7 +5,6 @@ import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
 import com.cn.meet.model.common.Constant;
-import com.cn.meet.model.common.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

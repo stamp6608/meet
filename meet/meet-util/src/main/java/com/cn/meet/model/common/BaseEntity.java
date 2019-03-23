@@ -1,4 +1,4 @@
-package com.cn.meet.model;
+package com.cn.meet.model.common;
 
 import java.io.Serializable;
 
