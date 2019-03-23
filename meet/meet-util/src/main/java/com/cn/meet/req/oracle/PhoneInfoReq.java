@@ -18,6 +18,9 @@ public class PhoneInfoReq {
     //国家(英文名，根据手机号的选择来定)
     @ParamCheck
     private String country;
+    //短信验证码
+    private String verifyCode;
+
 
     public String getTelephone() {
         return telephone;
@@ -41,5 +44,13 @@ public class PhoneInfoReq {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
     }
 }

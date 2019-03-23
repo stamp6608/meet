@@ -1,19 +1,24 @@
 package com.cn.meet.controller;
 
 import com.cn.meet.annotations.SecurityParameter;
+import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
-import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.model.common.ResponseEntity;
 import com.cn.meet.req.oracle.PhoneInfoReq;
+import com.cn.meet.req.oracle.UserInfoReq;
 import com.cn.meet.service.UserService;
+import com.cn.meet.util.DateUtils;
 import com.cn.meet.util.GeneralUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.Optional;
 
 /**
  * @program: meet
@@ -35,7 +40,7 @@ public class UserController {
      * @Author: Stamp.M
      * @Date: 2019/3/21
      */
-    @SecurityParameter(outEncode = true)
+    @SecurityParameter
     @PostMapping("/verify")
     @ResponseBody
     public ResponseEntity verify(BodyRequestWrapper request) throws GeneralException {
@@ -50,40 +55,55 @@ public class UserController {
         return ResponseEntity.initResponse();
     }
 
-//    @SecurityParameter(outEncode = false)
-  /*  @RequestMapping
-    public PageInfo<UserInfo> getAll(UserInfo userInfo) {
-        List<UserInfo> userInfoList = userInfoService.getAll(userInfo);
-        return new PageInfo<UserInfo>(userInfoList);
+
+    /** 
+    * @Description: 手机短信验证码验证
+    * @Param: [request] 
+    * @return: com.cn.meet.model.common.ResponseEntity 
+    * @Author: Stamp.M 
+    * @Date: 2019/3/23 
+    */ 
+    @SecurityParameter
+    @PostMapping("/vCode")
+    @ResponseBody
+    public ResponseEntity vCode(BodyRequestWrapper request) throws GeneralException {
+        PhoneInfoReq phone = (PhoneInfoReq) GeneralUtils.mapperParams(request, PhoneInfoReq.class);
+        String verifyCode = phone.getVerifyCode();
+        Object obj = request.getSession().getAttribute(phone.getTelephone());
+        String code = Optional.ofNullable(obj)
+                .map(a-> String.valueOf(a))
+                .orElse("");
+        if(StringUtils.isBlank(verifyCode) || StringUtils.isBlank(code)
+                || !StringUtils.equals(verifyCode, code))
+            throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHONE_VERIFY_ERROR);
+        //保存手机信息
+        userService.savePhoneVerify(phone);
+        return ResponseEntity.initResponse();
     }
 
-    @RequestMapping(value = "/add")
-    public UserInfo add() {
-        return new UserInfo();
+    /** 
+    * @Description: 用户信息注册
+    * @Param: [request] 
+    * @return: com.cn.meet.model.common.ResponseEntity 
+    * @Author: Stamp.M 
+    * @Date: 2019/3/23 
+    */ 
+    @SecurityParameter
+    @PostMapping("/info")
+    @ResponseBody
+    public ResponseEntity userInfo(BodyRequestWrapper request) throws GeneralException {
+        UserInfoReq user = (UserInfoReq) GeneralUtils.mapperParams(request, UserInfoReq.class);
+        //别名重复性校验
+        if(userService.checkAliasName(user.getAliasName()))
+            throw GeneralException.initEnumGeneralException(ResponseCodeEnum.ALIAS_NAME_ERROR);
+        user.setCreateTime(DateUtils.getSecondTimestamp(new Date()));
+        user.setUpdateTime(0);
+        userService.saveUserInfo(user);
+        return ResponseEntity.initResponse();
     }
 
-    @RequestMapping(value = "/view/{id}")
-    public UserInfo view(@PathVariable Integer id) {
-        ModelAndView result = new ModelAndView();
-        UserInfo userInfo = userInfoService.getById(id);
-        return userInfo;
-    }
 
-    @RequestMapping(value = "/delete/{id}")
-    public ModelMap delete(@PathVariable Integer id) {
-        ModelMap result = new ModelMap();
-        userInfoService.deleteById(id);
-        result.put("msg", "删除成功!");
-        return result;
-    }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelMap save(UserInfo userInfo) {
-        ModelMap result = new ModelMap();
-        String msg = userInfo.getId() == null ? "新增成功!" : "更新成功!";
-        userInfoService.save(userInfo);
-        result.put("userInfo", userInfo);
-        result.put("msg", msg);
-        return result;
-    }*/
+
+
 }

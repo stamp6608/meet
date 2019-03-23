@@ -13,7 +13,9 @@ public enum  ResponseCodeEnum {
     NON_SUPPORT_TYPE(501, "不支持的请求类型"),
     DECRYPT_ERROR(300, "参数解密失败"),
     PARAMETER_CHECK_ERROR(301, "参数校验失败"),
-    PHNOE_EXIST_ERROR(400, "此手机号已注册过");
+    PHNOE_EXIST_ERROR(400, "此手机号已注册过"),
+    PHONE_VERIFY_ERROR(401,"手机验证错误"),
+    ALIAS_NAME_ERROR(402,"别名已经存在");
 
     private Integer code;
     private String message;

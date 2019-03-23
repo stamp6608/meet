@@ -6,4 +6,22 @@
         select count(*) from user where telephone = #{phone}
     </select>
 
+    <insert id="savePhoneVerify"  parameterType="com.cn.meet.req.oracle.PhoneInfoReq" useGeneratedKeys="true" keyProperty="id">
+        insert into user(telephone, language, country) values(#{telephone},#{language},#{country})
+    </insert>
+
+    <select id="checkAliasName" resultType="int">
+        select count(*) from user where aliasName = #{aliasName}
+    </select>
+
+    <update id="saveUserInfo" parameterType="com.cn.meet.req.oracle.UserInfoReq">
+        update user set language=#{language},country=#{country},aliasName=#{aliasName},
+        edutication=#{edutication}, birthday=#{birthday}, religion=#{religion},hasBaby=#{hasBaby},
+        smoke=#{smoke}, expectShape=#{expectShape}, hobby=#{hobby}, expectAge=#{expectAge},
+        expectRace=#{expectRace}, weight=#{weight}, sex=#{sex}, shape=#{shape}, expectSex=#{expectSex},
+        race=#{race}, emotion=#{emotion}, expectType=#{expectType}, selfIntroduction=#{selfIntroduction},
+        updateTime=#{updateTime}, createTime=#{createTime}
+        where telephone=#{telephone}
+    </update>
+
 </mapper>
