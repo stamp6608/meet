@@ -24,6 +24,10 @@ public class ResponseEntity {
         this.data = data;
     }
 
+    public static ResponseEntity initSuccessResponse(Object obj) {
+        return new ResponseEntity(ResponseCodeEnum.SUCCESS_CODE.getCode(), ResponseCodeEnum.SUCCESS_CODE.getMessage(), obj);
+    }
+
     public static ResponseEntity initResponse() {
         return new ResponseEntity(ResponseCodeEnum.SUCCESS_CODE.getCode(), ResponseCodeEnum.SUCCESS_CODE.getMessage());
     }

@@ -5,7 +5,9 @@ import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
 import com.cn.meet.model.common.ResponseEntity;
+import com.cn.meet.model.entity.UserInfoEntity;
 import com.cn.meet.req.oracle.PhoneInfoReq;
+import com.cn.meet.req.oracle.UserInfo2Req;
 import com.cn.meet.req.oracle.UserInfoReq;
 import com.cn.meet.service.UserService;
 import com.cn.meet.util.DateUtils;
@@ -93,9 +95,9 @@ public class UserController {
     * @Date: 2019/3/23 
     */ 
     @SecurityParameter
-    @PostMapping("/info")
+    @PostMapping("/rUser")
     @ResponseBody
-    public ResponseEntity userInfo(BodyRequestWrapper request) throws GeneralException {
+    public ResponseEntity registUser(BodyRequestWrapper request) throws GeneralException {
         UserInfoReq user = (UserInfoReq) GeneralUtils.mapperParams(request, UserInfoReq.class);
         //别名重复性校验
         if(userService.checkAliasName(user.getAliasName()))
@@ -106,6 +108,23 @@ public class UserController {
         user.setIp(ip);
         userService.saveUserInfo(user);
         return ResponseEntity.initResponse();
+    }
+
+
+    /** 
+    * @Description: 查询用户信息
+    * @Param: [request] 
+    * @return: com.cn.meet.model.common.ResponseEntity 
+    * @Author: Stamp.M 
+    * @Date: 2019/3/23 
+    */ 
+    @SecurityParameter
+    @PostMapping("/info")
+    @ResponseBody
+    public ResponseEntity userInfo(BodyRequestWrapper request) throws GeneralException {
+        UserInfo2Req userReq = (UserInfo2Req) GeneralUtils.mapperParams(request, UserInfo2Req.class);
+        UserInfoEntity user  = userService.getUserInfo(userReq);
+        return ResponseEntity.initSuccessResponse(user);
     }
 
 

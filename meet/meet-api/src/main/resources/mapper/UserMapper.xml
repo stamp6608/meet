@@ -24,4 +24,8 @@
         where telephone=#{telephone}
     </update>
 
+    <select id="getUserInfo" resultType="com.cn.meet.model.entity.UserInfoEntity">
+        select * from user where telephone=#{telephone} and aliasName=#{name}
+    </select>
+
 </mapper>
