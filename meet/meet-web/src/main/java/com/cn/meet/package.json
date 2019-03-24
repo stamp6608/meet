@@ -1,0 +1,22 @@
+{
+  "name": "sample",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "leo",
+  "scripts": {
+    "start": "node index.js",
+    "doc": "apidoc -i ./routes -o ./apidoc",
+    "db": "sequelize-auto -o ./models -h localhost -d kg -u root -x 123qwe -e mysql",
+    "test": "mocha test.js"
+  },
+  "apidoc": {
+    "name": "接口服务",
+    "title": "接口文档",
+    "version": "1.0.0",
+    "header": {
+      "title": "接口概述",
+      "filename": "header.md"
+    }
+  }
+}

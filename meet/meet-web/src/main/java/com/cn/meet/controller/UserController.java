@@ -37,11 +37,21 @@ public class UserController {
     private UserService userService;
 
     /**
-     * @Description: 获取手机短信验证 (需接入第三方手机短信验证平台)
-     * @Param: [userInfo]
-     * @return: ResponseEntity
-     * @Author: Stamp.M
-     * @Date: 2019/3/21
+     * @api {POST} http://url/user/verify  1.1获取手机短信验证 (需接入第三方手机短信验证平台)
+     * @apiVersion 1.0.0
+     * @apiGroup 1用户管理
+     * @apiDescription 获取手机短信验证 (需接入第三方手机短信验证平台)
+     * @apiParam {String} telephone    手机号
+     * @apiParam {String} language 	   语种
+     * @apiParam {String} country      国家
+     * @apiSuccessExample {Object} 返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":{}
+     * }
+     * </b>
+     * 加密此json对象后返回
      */
     @SecurityParameter
     @PostMapping("/verify")
@@ -61,11 +71,22 @@ public class UserController {
 
 
     /**
-     * @Description: 手机短信验证码验证
-     * @Param: [request]
-     * @return: com.cn.meet.model.common.ResponseEntity
-     * @Author: Stamp.M
-     * @Date: 2019/3/23
+     * @api {POST} http://url/user/vCode  1.2手机短信验证码验证
+     * @apiVersion 1.0.0
+     * @apiGroup 1用户管理
+     * @apiDescription 手机短信验证码验证
+     * @apiParam {String} telephone    手机号
+     * @apiParam {String} language 	   语种
+     * @apiParam {String} country      国家
+     * @apiParam {String} verifyCode   短信验证码
+     * @apiSuccessExample {Object} 返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":{}
+     * }
+     * </b>
+     * 加密此json对象后返回
      */
     @SecurityParameter
     @PostMapping("/vCode")
@@ -88,11 +109,42 @@ public class UserController {
     }
 
     /**
-     * @Description: 用户信息注册
-     * @Param: [request]
-     * @return: com.cn.meet.model.common.ResponseEntity
-     * @Author: Stamp.M
-     * @Date: 2019/3/23
+     * @api {POST} http://url/user/rUser  1.3用户信息注册
+     * @apiVersion 1.0.0
+     * @apiGroup 1用户管理
+     * @apiDescription 用户信息注册，请在http的header中设置ip。
+     * </b>
+     * 各选项用对应数字表示，多选请用","分割
+     * @apiParam {String} telephone    手机号
+     * @apiParam {String} language 	   语种
+     * @apiParam {String} country      国家
+     * @apiParam {String} aliasName    别名
+     * @apiParam {String} birthday     生日
+     * @apiParam {String} weight       身高/体重
+     * @apiParam {String} sex          性别 (MAN("男","1"),WOMAN("女","2"), OTHER("其他", "0"))
+     * @apiParam {String} city         城市
+     * @apiParam {String} shape        体型 (BALANCE("匀称","1"),NORMAL("一般","0"), CONCERT("协调", "2"),FAT("胖","3"),MUSCULAR("肌肉","4"), THIN("瘦", "5"),STRONG("强壮","6"))
+     * @apiParam {String} race         种族 (OTHER("其它","0"), ASIA("亚洲","1"), AFRICA("非洲", "2"),LATIN("拉丁","3"),MIDDLE("中东","4"), MESTIZO("混血", "5"),AMERICA("美洲","6"),SOURCE("南亚", "5"),EUROPE("欧洲","6"))
+     * @apiParam {String} emotion      情感状况 (SINGLE("单身","0"), MARRIED("已婚","1"), DISSOCIATON("离异", "2"),LOVE("恋爱中","3"))
+     * @apiParam {String} selfIntroduction   自我介绍
+     * @apiParam {String} expectType   期待类型 (NONE("无","0"), CHAT("聊天","1"), APPOINTMENT("约会", "2"),MAKE("交友","3"), NETCHAT("网聊","4"), FRIEND("朋友", "5"),HOOKUP("约炮","6"))
+     * @apiParam {String} expectSex   期待约会性别 (MAN("男","1"), WOMAN("女","2"), APPOINTMENT("其它", "0"))
+     * @apiParam {String} expectShape  期待约会体型 ( BALANCE("匀称","1"),NORMAL("一般","0"), CONCERT("协调", "2"),FAT("胖","3"),MUSCULAR("肌肉","4"), THIN("瘦", "5"),STRONG("强壮","6"))
+     * @apiParam {String} expectRace   期待约会种族 (OTHER("其它","0"), ASIA("亚洲","1"), AFRICA("非洲", "2"),LATIN("拉丁","3"),MIDDLE("中东","4"), MESTIZO("混血", "5"),AMERICA("美洲","6"),SOURCE("南亚", "5"),EUROPE("欧洲","6"))
+     * @apiParam {String} expectAge   期待约会年龄
+     * @apiParam {String} hobby       爱好 (NONE("无","0"), MOVIE("电影","1"), READ("读书", "2"),TV("电视","3"), MUSIC("音乐","4"),FAMILY("家庭", "5"),PET("宠物","6"),DIRINK("喝酒", "7"), HOTEL("旅馆","8"),SHOP("购物","9"), PHYSICAL("看体育节目", "10"),SPROTS("运动","11"),BAR("酒吧", "12"),DANCE("跳舞", "13"),GAME("游戏","14"))
+     * @apiParam {String} religion    宗教 (NONE("无","0"), BUDDHIST("佛教","1"), CHRISTIAN("基督教", "2"),CATHOLIC("天主教","3"), SIKH("印度教","4"),ISLAMITE("伊斯兰教", "5"),OTHERS("其他教派","6"))
+     * @apiParam {String} edutication 教育 (NONE("无","0"), HIGHSCHOOL("高中","1"), ACADEMIC("学院", "2"),COLLEAGE("本科","3"), JUNIOR("专科","4"),DOCTOR("博士", "5"),MASTER("硕士","6"))
+     * @apiParam {String} smoke       吸烟/喝酒 (NEVER("从不","1"),SOMETIMES("偶尔","2"), USUALLY("经常", "3"), NONE("无", "0"))
+     * @apiParam {String} hasBaby     是否期待小孩 (NONE("无","1"),COHABIT("已育同住","2"), SEPARATION("已育分居", "0"),NOBABY("无小孩","1"), SINGLE("独身主义者","2"))
+     * @apiSuccessExample {Object} 返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":{}
+     * }
+     * </b>
+     * 加密此json对象后返回
      */
     @SecurityParameter
     @PostMapping("/rUser")
@@ -112,11 +164,46 @@ public class UserController {
 
 
     /**
-     * @Description: 查询用户个人信息
-     * @Param: [request]
-     * @return: com.cn.meet.model.common.ResponseEntity
-     * @Author: Stamp.M
-     * @Date: 2019/3/23
+     * @api {POST} http://url/user/info  1.4查询用户个人信息
+     * @apiVersion 1.0.0
+     * @apiGroup 1用户管理
+     * @apiDescription 查询用户个人信息, 数字解析同1.3的参数定义，多选用","分割
+     * @apiParam {String} telephone   手机号
+     * @apiParam {String} name 	     别名
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":{
+     * "code" : 200,
+     * "message" : "success",
+     * "data" : {
+     * "telephone" : "9847098888",     //手机号
+     * "language" : "English",         //语种
+     * "country" : "Philippines",      //国家
+     * "aliasName" : "marry",          //别名
+     * "birthday" : "10/5",            //生日
+     * "weight" : "55-70",             //身高/体重
+     * "sex" : "1",                    //性别
+     * "shape" : "2",                  //体型
+     * "race" : "3",                   //种族
+     * "emotion" : "3",                //情感状况
+     * "selfIntroduction" : "你好",     //自我介绍
+     * "expectType" : "1,2",           //期待类型
+     * "expectSex" : "1,2",            //期待约会性别
+     * "expectShape" : "1,3,4",        //期待约会体型
+     * "expectRace" : "2,3",           //期待约会种族
+     * "expectAge" : "30-50",          //期待约会年龄
+     * "city" : "Makaty",              //城市
+     * "hobby" : "2,4,5",              //爱好
+     * "religion" : "3",               //宗教
+     * "edutication" : "2",            //教育
+     * "smoke" : "1",                  //吸烟/喝酒
+     * "hasBaby" : "0"                 //是否期待小孩
+     * }
+     * }
+     * }
+     * </b>
+     * 加密此json对象后返回
      */
     @SecurityParameter
     @PostMapping("/info")
