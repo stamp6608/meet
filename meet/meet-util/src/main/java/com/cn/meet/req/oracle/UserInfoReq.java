@@ -30,6 +30,9 @@ public class UserInfoReq {
     //性别
     @ParamCheck
     private String sex;
+    //城市
+    @ParamCheck
+    private String city;
     //体型
     @ParamCheck
     private String shape;
@@ -80,6 +83,14 @@ public class UserInfoReq {
     //注册IP
     private String ip;
 
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getIp() {
         return ip;

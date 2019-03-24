@@ -39,6 +39,8 @@ public class UserInfoEntity {
     private String expectRace;
     //期待约会年龄
     private String expectAge;
+    //城市
+    private String city;
     //爱好
     private String hobby;
     //宗教
@@ -50,6 +52,14 @@ public class UserInfoEntity {
     //是否期待小孩
     private String hasBaby;
 
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getExpectShape() {
         return expectShape;

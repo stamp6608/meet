@@ -2,11 +2,13 @@ package com.cn.meet.util;
 
 import com.alibaba.fastjson.JSON;
 import com.cn.meet.annotations.ParamCheck;
+import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
-import com.cn.meet.enums.ResponseCodeEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 
@@ -17,6 +19,7 @@ import java.lang.reflect.Field;
  * @create: 2019-03-21 14:01
  **/
 public class GeneralUtils {
+    private static Logger logger = LoggerFactory.getLogger(GeneralUtils.class);
 
     /**
      * @Description: json参数转换成指定的参数对象
@@ -74,7 +77,9 @@ public class GeneralUtils {
         String result = "";
         try {
             String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+            logger.info("<<<响应数据>>>加密前：{}",json);
             result = AesEncryptUtils.encrypt(json);
+            logger.info("<<<响应数据>>>加密后：{}",result);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -20,7 +20,7 @@
         smoke=#{smoke}, expectShape=#{expectShape}, hobby=#{hobby}, expectAge=#{expectAge}, ip=#{ip},
         expectRace=#{expectRace}, weight=#{weight}, sex=#{sex}, shape=#{shape}, expectSex=#{expectSex},
         race=#{race}, emotion=#{emotion}, expectType=#{expectType}, selfIntroduction=#{selfIntroduction},
-        updateTime=#{updateTime}, createTime=#{createTime}
+        updateTime=#{updateTime}, createTime=#{createTime}, city=#{city}
         where telephone=#{telephone}
     </update>
 
