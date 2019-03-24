@@ -170,6 +170,7 @@ public class UserController {
      * @apiDescription 查询用户个人信息, 数字解析同1.3的参数定义，多选用","分割
      * @apiParam {String} telephone   手机号
      * @apiParam {String} name 	     别名
+     * @apiSuccessExample {Object} 返回成功
      * {
      * "code":0,
      * "message:"success",
