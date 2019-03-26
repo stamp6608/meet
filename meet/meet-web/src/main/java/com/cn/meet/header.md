@@ -4,17 +4,17 @@
 ## 调用频率
 目前暂没有调用频率限制
 
-##　接口调用
-接口请求方式：POST
-接口请求参数json格式，{param:参数加密字符串}
-接口响应数据String格式，加密后的字符串
+## 接口调用
+接口请求方式：POST;
+接口请求参数json格式，{param:参数加密字符串};
+接口响应数据String格式，加密后的字符串;
 响应数据格式(加密前)：
 {
     "code":0,
     "message":"success",
     "data": {}
 }
-code=0表示响应正常，否者响应异常，具体见message字段，data表示响应的数据
+code=0表示响应正常，否者响应异常，具体见message字段，data表示响应的数据;
 说明：http请求中，请务必在header中设置 x-forward-for=客户端ip
 
 ## 变更记录

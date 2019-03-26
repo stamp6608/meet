@@ -1,0 +1,19 @@
+define({
+  "name": "meet",
+  "version": "1.0.0",
+  "description": "meet接口文档",
+  "title": "API接口文档",
+  "header": {
+    "title": "接口概述",
+    "content": "<h2>接口概述</h2>\n<p>Ｍeet接口服务</p>\n<h2>调用频率</h2>\n<p>目前暂没有调用频率限制</p>\n<h2>接口调用</h2>\n<p>接口请求方式：POST;\n接口请求参数json格式，{param:参数加密字符串};\n接口响应数据String格式，加密后的字符串;\n响应数据格式(加密前)：\n{\n&quot;code&quot;:0,\n&quot;message&quot;:&quot;success&quot;,\n&quot;data&quot;: {}\n}\ncode=0表示响应正常，否者响应异常，具体见message字段，data表示响应的数据;\n说明：http请求中，请务必在header中设置 x-forward-for=客户端ip</p>\n<h2>变更记录</h2>\n<table>\n<thead>\n<tr>\n<th>版本号</th>\n<th>变更时间</th>\n<th>变更内容</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1.0.0</td>\n<td>2018-01-22</td>\n<td>第一次提交，文档内容整理并按照新规范编写</td>\n</tr>\n</tbody>\n</table>\n"
+  },
+  "sampleUrl": false,
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2019-03-26T11:23:44.540Z",
+    "url": "http://apidocjs.com",
+    "version": "0.17.6"
+  }
+});
