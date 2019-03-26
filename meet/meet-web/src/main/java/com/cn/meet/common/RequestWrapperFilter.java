@@ -75,6 +75,7 @@ public class RequestWrapperFilter implements Filter {
             requestWrapper.getRequestDispatcher("/error/msg").forward(requestWrapper,response);
             return;
         }
+        //todo 待token校验
         requestWrapper.setDecryptJson(paramStr);
         chain.doFilter(requestWrapper, response);
     }

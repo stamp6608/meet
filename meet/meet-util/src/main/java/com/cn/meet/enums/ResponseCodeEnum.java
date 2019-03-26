@@ -15,7 +15,8 @@ public enum  ResponseCodeEnum {
     PARAMETER_CHECK_ERROR(301, "参数校验失败"),
     PHNOE_EXIST_ERROR(400, "此手机号已注册过"),
     PHONE_VERIFY_ERROR(401,"手机验证错误"),
-    ALIAS_NAME_ERROR(402,"别名已经存在");
+    ALIAS_NAME_ERROR(402,"别名已经存在"),
+    PHNOE_CHECK_ERROR(403, "手机号不存在");
 
     private Integer code;
     private String message;

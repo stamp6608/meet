@@ -5,9 +5,11 @@ import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
 import com.cn.meet.model.common.ResponseEntity;
+import com.cn.meet.model.common.Token;
 import com.cn.meet.model.entity.UserInfoEntity;
 import com.cn.meet.req.oracle.PhoneInfoReq;
 import com.cn.meet.req.oracle.UserInfo2Req;
+import com.cn.meet.req.oracle.UserInfo3Req;
 import com.cn.meet.req.oracle.UserInfoReq;
 import com.cn.meet.service.UserService;
 import com.cn.meet.util.DateUtils;
@@ -137,7 +139,9 @@ public class UserController {
      * @apiParam {String} edutication 教育 (NONE("无","0"), HIGHSCHOOL("高中","1"), ACADEMIC("学院", "2"),COLLEAGE("本科","3"), JUNIOR("专科","4"),DOCTOR("博士", "5"),MASTER("硕士","6"))
      * @apiParam {String} smoke       吸烟/喝酒 (NEVER("从不","1"),SOMETIMES("偶尔","2"), USUALLY("经常", "3"), NONE("无", "0"))
      * @apiParam {String} hasBaby     是否期待小孩 (NONE("无","1"),COHABIT("已育同住","2"), SEPARATION("已育分居", "0"),NOBABY("无小孩","1"), SINGLE("独身主义者","2"))
-     * @apiSuccessExample {Object} 返回成功
+     * @apiParam {String} longitude    经度
+     * @apiParam {String} latitude     维度
+     * @apiSuccessExample {Object}  返回成功
      * {
      * "code":0,
      * "message:"success",
@@ -215,5 +219,28 @@ public class UserController {
         return ResponseEntity.initSuccessResponse(user);
     }
 
+    /** 
+    * @Description: 用户登陆
+    * @Param: [request] 
+    * @return: com.cn.meet.model.common.ResponseEntity 
+    * @Author: Stamp.M 
+    * @Date: 2019/3/26 
+    */ 
+    @SecurityParameter
+    @PostMapping("/login")
+    @ResponseBody
+    public ResponseEntity login(BodyRequestWrapper request) throws GeneralException {
+        UserInfo3Req userReq = (UserInfo3Req) GeneralUtils.mapperParams(request, UserInfo3Req.class);
+        //手机号是否注册过验证
+        if (!userService.checkPhone(userReq.getTelephone()))
+            throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHNOE_CHECK_ERROR);
+        //更新用户的经度和维度
+        userService.updateUserLocation(userReq);
+        Token token = new Token();
+        token.setTelephone(userReq.getTelephone());
+        token.setToken(GeneralUtils.buildToke());
+        //todo 缓存token,用于过滤器中token校验
+        return ResponseEntity.initSuccessResponse(token);
+    }
 
 }

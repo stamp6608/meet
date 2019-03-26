@@ -6,6 +6,7 @@ import com.cn.meet.mapper.UserMapper;
 import com.cn.meet.model.entity.UserInfoEntity;
 import com.cn.meet.req.oracle.PhoneInfoReq;
 import com.cn.meet.req.oracle.UserInfo2Req;
+import com.cn.meet.req.oracle.UserInfo3Req;
 import com.cn.meet.req.oracle.UserInfoReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,19 @@ public class UserService {
     */ 
     public UserInfoEntity getUserInfo(UserInfo2Req userInfo2Req){
         return userMapper.getUserInfo(userInfo2Req);
+    }
+
+    /**
+     * @Description: 更改用户经度和维度信息
+     * @Param: [userInfoReq]
+     * @return: void
+     * @Author: Stamp.M
+     * @Date: 2019/3/23
+     */
+    @Transactional
+    public void updateUserLocation(UserInfo3Req userInfoReq) throws GeneralException{
+        Integer res = userMapper.updateUserLocation(userInfoReq);
+        if(res != 1) throw GeneralException.initEnumGeneralException(ResponseCodeEnum.INNER_ERROR);
     }
 
 }

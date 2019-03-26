@@ -15,17 +15,20 @@
     </select>
 
     <update id="saveUserInfo" parameterType="com.cn.meet.req.oracle.UserInfoReq">
-        update user set language=#{language},country=#{country},aliasName=#{aliasName},
-        edutication=#{edutication}, birthday=#{birthday}, religion=#{religion},hasBaby=#{hasBaby},
-        smoke=#{smoke}, expectShape=#{expectShape}, hobby=#{hobby}, expectAge=#{expectAge}, ip=#{ip},
-        expectRace=#{expectRace}, weight=#{weight}, sex=#{sex}, shape=#{shape}, expectSex=#{expectSex},
-        race=#{race}, emotion=#{emotion}, expectType=#{expectType}, selfIntroduction=#{selfIntroduction},
-        updateTime=#{updateTime}, createTime=#{createTime}, city=#{city}
-        where telephone=#{telephone}
+        update user set language=#{language},country=#{country},aliasName=#{aliasName},edutication=#{edutication},
+        birthday=#{birthday}, religion=#{religion},hasBaby=#{hasBaby},smoke=#{smoke}, expectShape=#{expectShape},
+        hobby=#{hobby}, expectAge=#{expectAge}, ip=#{ip},expectRace=#{expectRace}, weight=#{weight}, sex=#{sex},
+        shape=#{shape}, expectSex=#{expectSex},race=#{race}, emotion=#{emotion}, expectType=#{expectType},
+        selfIntroduction=#{selfIntroduction},longitude = ${longitude}, latitude=${latitude}, updateTime=#{updateTime},
+        createTime=#{createTime}, city=#{city} where telephone=#{telephone}
     </update>
 
     <select id="getUserInfo" resultType="com.cn.meet.model.entity.UserInfoEntity">
         select * from user where telephone=#{telephone} and aliasName=#{name}
     </select>
+
+    <update id="updateUserLocation" parameterType="com.cn.meet.req.oracle.UserInfo3Req">
+        update user set longitude = ${longitude}, latitude=${latitude} where telephone=#{telephone}
+    </update>
 
 </mapper>

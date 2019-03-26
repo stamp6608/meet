@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
+import java.util.UUID;
 
 /**
  * @program: meet
@@ -84,5 +85,16 @@ public class GeneralUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    /** 
+    * @Description: 生成唯一标示符
+    * @Param: [] 
+    * @return: java.lang.String 
+    * @Author: Stamp.M 
+    * @Date: 2019/3/26 
+    */ 
+    public static String buildToke(){
+        return UUID.randomUUID().toString().replaceAll("-","");
     }
 }
