@@ -99,7 +99,6 @@ public class RequestWrapperFilter implements Filter {
             Object obj = redisTemplate.opsForValue().get(telephone+ Constant.USER_TOKEN);
             String cacheToken = GeneralUtils.getStringValue(obj);
             if(StringUtils.isBlank(cacheToken)){
-                //缓存获取token失败，从数据库中获取token
                 log.info("从缓存获取token失败...从数据库中获取token......");
                 cacheToken = userService.getUserToken(telephone);
             }
