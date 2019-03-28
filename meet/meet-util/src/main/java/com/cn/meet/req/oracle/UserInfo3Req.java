@@ -19,7 +19,17 @@ public class UserInfo3Req {
     //维度
     @ParamCheck
     private String latitude;
+    //登陆成功的令牌
+    private String token;
 
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getTelephone() {
         return telephone;

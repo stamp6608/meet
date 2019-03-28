@@ -234,13 +234,18 @@ public class UserController {
         //手机号是否注册过验证
         if (!userService.checkPhone(userReq.getTelephone()))
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHNOE_CHECK_ERROR);
-        //更新用户的经度和维度
-        userService.updateUserLocation(userReq);
         Token token = new Token();
         token.setTelephone(userReq.getTelephone());
-        token.setToken(GeneralUtils.buildToke());
+        token.setToken(GeneralUtils.buildToken());
         //todo 缓存token,用于过滤器中token校验
+
+        //更新用户的经度和维度和token
+        userService.updateUserLocation(userReq);
         return ResponseEntity.initSuccessResponse(token);
     }
+
+
+
+
 
 }

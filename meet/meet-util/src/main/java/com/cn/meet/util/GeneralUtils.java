@@ -94,7 +94,7 @@ public class GeneralUtils {
     * @Author: Stamp.M 
     * @Date: 2019/3/26 
     */ 
-    public static String buildToke(){
+    public static String buildToken(){
         return UUID.randomUUID().toString().replaceAll("-","");
     }
 }

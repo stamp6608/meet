@@ -28,7 +28,7 @@
     </select>
 
     <update id="updateUserLocation" parameterType="com.cn.meet.req.oracle.UserInfo3Req">
-        update user set longitude = ${longitude}, latitude=${latitude} where telephone=#{telephone}
+        update user set longitude = ${longitude}, latitude=${latitude}, token=${token} where telephone=#{telephone}
     </update>
 
 </mapper>
