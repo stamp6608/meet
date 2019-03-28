@@ -2,11 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cn.meet.mapper.UserMapper">
 
+    <resultMap id="users" type="com.cn.meet.model.entity.UserInfoEntity">
+        <result column="telephone" property="telephone"/>
+        <result column="language" property="language"/>
+        <result column="country" property="country"/>
+        <result column="aliasName" property="aliasName"/>
+        <result column="birthday" property="birthday"/>
+        <result column="weight" property="weight"/>
+        <result column="sex" property="sex"/>
+        <result column="city" property="city"/>
+        <result column="shape" property="shape"/>
+        <result column="race" property="race"/>
+        <result column="emotion" property="emotion"/>
+        <result column="selfIntroduction" property="selfIntroduction"/>
+        <result column="expectType" property="expectType"/>
+        <result column="expectSex" property="expectSex"/>
+        <result column="expectShape" property="expectShape"/>
+        <result column="expectRace" property="expectRace"/>
+        <result column="expectAge" property="expectAge"/>
+        <result column="hobby" property="hobby"/>
+        <result column="religion" property="religion"/>
+        <result column="edutication" property="edutication"/>
+        <result column="smoke" property="smoke"/>
+        <result column="hasBaby" property="hasBaby"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="imgPath" property="imgPath"/>
+    </resultMap>
+
+
     <select id="checkPhone" resultType="int">
         select count(*) from user where telephone = #{phone}
     </select>
 
-    <insert id="savePhoneVerify"  parameterType="com.cn.meet.req.oracle.PhoneInfoReq" useGeneratedKeys="true" keyProperty="id">
+    <insert id="savePhoneVerify" parameterType="com.cn.meet.req.oracle.PhoneInfoReq" useGeneratedKeys="true"
+            keyProperty="id">
         insert into user(telephone, language, country) values(#{telephone},#{language},#{country})
     </insert>
 
@@ -30,5 +60,9 @@
     <update id="updateUserLocation" parameterType="com.cn.meet.req.oracle.UserInfo3Req">
         update user set longitude = ${longitude}, latitude=${latitude}, token=${token} where telephone=#{telephone}
     </update>
+
+    <select id="getAllUser" resultMap="users">
+        select * from user
+    </select>
 
 </mapper>

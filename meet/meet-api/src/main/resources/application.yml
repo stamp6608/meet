@@ -27,6 +27,7 @@ spring:
     redis:
         host: localhost
         port: 6379
+        password: hfnfn994etu
         timeout: 3000 # 超时时间
         lettuce:
           pool:

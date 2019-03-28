@@ -1,12 +1,16 @@
 package com.cn.meet.model.entity;
 
+import java.io.Serializable;
+
 /**
  * @program: meet
  * @description: 用户信息类
  * @author: Stamp.M
  * @create: 2019-03-16 20:21
  **/
-public class UserInfoEntity {
+public class UserInfoEntity implements Serializable{
+
+    private static final long serialVersionUID = -4884300323260301077L;
     //手机号，唯一标识
     private String telephone;
     //语言
@@ -51,7 +55,46 @@ public class UserInfoEntity {
     private String smoke;
     //是否期待小孩
     private String hasBaby;
+    //经度
+    private String longitude;
+    //维度
+    private String latitude;
+    //登陆成功的令牌
+    private String token;
+    //图片路径
+    private String imgPath;
 
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getCity() {
         return city;

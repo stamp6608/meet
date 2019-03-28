@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 /** 
 * @Description: 用户管理Service
@@ -81,6 +83,11 @@ public class UserService {
     */ 
     public UserInfoEntity getUserInfo(UserInfo2Req userInfo2Req){
         return userMapper.getUserInfo(userInfo2Req);
+    }
+
+
+    public List<UserInfoEntity> getAllUser(){
+        return userMapper.getAllUser();
     }
 
     /**

@@ -13,6 +13,8 @@ public class Constant {
     public static final String ERROR_SESSION_ENUM="errorSessionEnum";
     //常用数据分隔符
     public static final String SPLIT_STR="@685@";
+    //所有用户缓存
+    public static final String USERS_CACHE_INIT="initUserCache";
 
 
 }

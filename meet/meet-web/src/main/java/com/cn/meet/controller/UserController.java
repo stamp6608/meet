@@ -242,7 +242,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity login(BodyRequestWrapper request) throws GeneralException {
         UserInfo3Req userReq = (UserInfo3Req) GeneralUtils.mapperParams(request, UserInfo3Req.class);
-        log.info("用户登陆......");
+        log.info("用户{}登陆......", userReq.getTelephone());
         //手机号是否注册过验证
         if (!userService.checkPhone(userReq.getTelephone()))
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHNOE_CHECK_ERROR);

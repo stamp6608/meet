@@ -8,6 +8,8 @@ import com.cn.meet.req.oracle.UserInfo3Req;
 import com.cn.meet.req.oracle.UserInfoReq;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
      Integer checkPhone(String phone);
@@ -15,5 +17,6 @@ public interface UserMapper {
      Integer checkAliasName(String aliasName);
      Integer saveUserInfo(UserInfoReq userInfoReq);
      UserInfoEntity getUserInfo(UserInfo2Req userInfo2Req);
+     List<UserInfoEntity> getAllUser();
      Integer updateUserLocation(UserInfo3Req userInfoReq);
 }
