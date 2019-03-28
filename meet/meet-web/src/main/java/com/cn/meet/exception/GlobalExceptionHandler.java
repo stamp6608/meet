@@ -32,6 +32,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public String exceptionHandler(HttpServletRequest httpServletRequest, Exception e) {
+        e.printStackTrace();
         logger.error("服务错误:", e.getMessage());
         return GeneralUtils.encryptRes(ResponseEntity.initErrorResponseEntity(ResponseCodeEnum.INNER_ERROR));
     }

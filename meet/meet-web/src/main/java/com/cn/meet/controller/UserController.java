@@ -226,13 +226,26 @@ public class UserController {
         return ResponseEntity.initSuccessResponse(user);
     }
 
-    /** 
-    * @Description: 用户登陆
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/3/26 
-    */ 
+    /**
+     * @api {POST} http://url/user/login  1.5用户登陆
+     * @apiVersion 1.0.0
+     * @apiGroup 1用户管理
+     * @apiDescription 用户登陆
+     * @apiParam {String} telephone    手机号
+     * @apiParam {String} longitude    经度
+     * @apiParam {String} latitude 	   维度
+     * @apiSuccessExample {Object}     返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":{
+     * "telephone" : "9847098888",                     //手机号
+     * "token" : "bb9c9590cece43debcb0844de24ff09e"    //token
+     * }
+     * }
+     * </b>
+     * 加密此json对象后返回
+     */
     @SecurityParameter
     @PostMapping("/login")
     @ResponseBody
@@ -247,6 +260,7 @@ public class UserController {
         log.info("用户{}登陆......, cur token : {}", userReq.getTelephone(), token.getToken());
         redisTemplate.opsForValue().set(token.getTelephone()+ Constant.USER_TOKEN, token.getToken());
         //更新用户的经度和维度和token
+        userReq.setToken(token.getToken());
         userService.updateUserLocation(userReq);
         return ResponseEntity.initSuccessResponse(token);
     }

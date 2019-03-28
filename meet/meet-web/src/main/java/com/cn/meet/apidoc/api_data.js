@@ -41,6 +41,53 @@ define({ "api": [
   },
   {
     "type": "POST",
+    "url": "http://url/user/login",
+    "title": "1.5用户登陆",
+    "version": "1.0.0",
+    "group": "1用户管理",
+    "description": "<p>用户登陆</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "telephone",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "longitude",
+            "description": "<p>经度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "latitude",
+            "description": "<p>维度</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":{\n\"telephone\" : \"9847098888\",                     //手机号\n\"token\" : \"bb9c9590cece43debcb0844de24ff09e\"    //token\n}\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "./controller/UserController.java",
+    "groupTitle": "1用户管理",
+    "name": "PostHttpUrlUserLogin"
+  },
+  {
+    "type": "POST",
     "url": "http://url/user/rUser",
     "title": "1.3用户信息注册",
     "version": "1.0.0",
