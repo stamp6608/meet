@@ -10,9 +10,10 @@ public enum  ResponseCodeEnum {
 
     SUCCESS_CODE(200, "success"),
     INNER_ERROR(500, "系统出错"),
-    NON_SUPPORT_TYPE(501, "不支持的请求类型"),
+    NON_SUPPORT_TYPE(501, "不支持的请求"),
     DECRYPT_ERROR(300, "参数解密失败"),
     PARAMETER_CHECK_ERROR(301, "参数校验失败"),
+    TOKEN_CHECK_ERROR(302, "token校验失败"),
     PHNOE_EXIST_ERROR(400, "此手机号已注册过"),
     PHONE_VERIFY_ERROR(401,"手机验证错误"),
     ALIAS_NAME_ERROR(402,"别名已经存在"),

@@ -85,7 +85,25 @@ public class UserService {
         return userMapper.getUserInfo(userInfo2Req);
     }
 
-
+    
+    /** 
+    * @Description: 获取用户token
+    * @Param: [telephone] 
+    * @return: com.cn.meet.model.entity.UserInfoEntity 
+    * @Author: Stamp.M
+    * @Date: 2019/3/28 
+    */ 
+    public String getUserToken(String telephone){
+        return userMapper.getUserToken(telephone);
+    }
+    
+    /** 
+    * @Description: 获取所有用户信息
+    * @Param: [] 
+    * @return: java.util.List<com.cn.meet.model.entity.UserInfoEntity> 
+    * @Author: Stamp.M 
+    * @Date: 2019/3/28 
+    */ 
     public List<UserInfoEntity> getAllUser(){
         return userMapper.getAllUser();
     }

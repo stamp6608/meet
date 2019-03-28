@@ -4,6 +4,7 @@ import com.cn.meet.annotations.SecurityParameter;
 import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
+import com.cn.meet.model.common.Constant;
 import com.cn.meet.model.common.ResponseEntity;
 import com.cn.meet.model.common.Token;
 import com.cn.meet.model.entity.UserInfoEntity;
@@ -18,7 +19,7 @@ import com.cn.meet.util.IPUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.Optional;
 
 /**
  * @program: meet
@@ -40,12 +40,12 @@ import java.util.Optional;
 public class UserController {
 
     // 仅支持String类型的缓存
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+//    @Autowired
+//    private StringRedisTemplate redisTemplate;
 
     // 支持多类型的数据缓存
-//    @Autowired
-//    private RedisTemplate<Object, Object> redisTemplate;
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
     @Resource
     private UserService userService;
 
@@ -108,9 +108,7 @@ public class UserController {
         PhoneInfoReq phone = (PhoneInfoReq) GeneralUtils.mapperParams(request, PhoneInfoReq.class);
         String verifyCode = phone.getVerifyCode();
         Object obj = request.getSession().getAttribute(phone.getTelephone());
-        String code = Optional.ofNullable(obj)
-                .map(a -> String.valueOf(a))
-                .orElse("");
+        String code = GeneralUtils.getStringValue(obj);
         if (StringUtils.isBlank(verifyCode) || StringUtils.isBlank(code)
                 || !StringUtils.equals(verifyCode, code))
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHONE_VERIFY_ERROR);
@@ -150,9 +148,7 @@ public class UserController {
      * @apiParam {String} edutication 教育 (NONE("无","0"), HIGHSCHOOL("高中","1"), ACADEMIC("学院", "2"),COLLEAGE("本科","3"), JUNIOR("专科","4"),DOCTOR("博士", "5"),MASTER("硕士","6"))
      * @apiParam {String} smoke       吸烟/喝酒 (NEVER("从不","1"),SOMETIMES("偶尔","2"), USUALLY("经常", "3"), NONE("无", "0"))
      * @apiParam {String} hasBaby     是否期待小孩 (NONE("无","1"),COHABIT("已育同住","2"), SEPARATION("已育分居", "0"),NOBABY("无小孩","1"), SINGLE("独身主义者","2"))
-     * @apiParam {String} longitude    经度
-     * @apiParam {String} latitude     维度
-     * @apiSuccessExample {Object}  返回成功
+     * @apiSuccessExample {Object}    返回成功
      * {
      * "code":0,
      * "message:"success",
@@ -184,8 +180,8 @@ public class UserController {
      * @apiGroup 1用户管理
      * @apiDescription 查询用户个人信息, 数字解析同1.3的参数定义，多选用","分割
      * @apiParam {String} telephone   手机号
-     * @apiParam {String} name 	     别名
-     * @apiSuccessExample {Object} 返回成功
+     * @apiParam {String} name 	      别名
+     * @apiSuccessExample {Object}    返回成功
      * {
      * "code":0,
      * "message:"success",
@@ -242,19 +238,14 @@ public class UserController {
     @ResponseBody
     public ResponseEntity login(BodyRequestWrapper request) throws GeneralException {
         UserInfo3Req userReq = (UserInfo3Req) GeneralUtils.mapperParams(request, UserInfo3Req.class);
-        log.info("用户{}登陆......", userReq.getTelephone());
         //手机号是否注册过验证
         if (!userService.checkPhone(userReq.getTelephone()))
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHNOE_CHECK_ERROR);
         Token token = new Token();
         token.setTelephone(userReq.getTelephone());
         token.setToken(GeneralUtils.buildToken());
-        //redis 使用示例
-        redisTemplate.opsForValue().set("a","aa");
-        String a = redisTemplate.opsForValue().get("a");
-        //todo 缓存token,用于过滤器中token校验
-
-
+        log.info("用户{}登陆......, cur token : {}", userReq.getTelephone(), token.getToken());
+        redisTemplate.opsForValue().set(token.getTelephone()+ Constant.USER_TOKEN, token.getToken());
         //更新用户的经度和维度和token
         userService.updateUserLocation(userReq);
         return ResponseEntity.initSuccessResponse(token);

@@ -15,6 +15,8 @@ public class Constant {
     public static final String SPLIT_STR="@685@";
     //所有用户缓存
     public static final String USERS_CACHE_INIT="initUserCache";
+    //token 缓存
+    public static final String USER_TOKEN = "userToken";
 
 
 }

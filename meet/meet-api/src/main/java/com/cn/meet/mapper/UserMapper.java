@@ -17,6 +17,7 @@ public interface UserMapper {
      Integer checkAliasName(String aliasName);
      Integer saveUserInfo(UserInfoReq userInfoReq);
      UserInfoEntity getUserInfo(UserInfo2Req userInfo2Req);
+     String getUserToken(String telephone);
      List<UserInfoEntity> getAllUser();
      Integer updateUserLocation(UserInfo3Req userInfoReq);
 }

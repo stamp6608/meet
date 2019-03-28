@@ -34,8 +34,6 @@ public class InitCache {
         log.info(" cur size of users is : {}",list.size());
         redisTemplate.opsForValue().set(Constant.USERS_CACHE_INIT, list);
         log.info("init cache end......");
-//        List<UserInfoEntity> users = (List<UserInfoEntity>)redisTemplate.opsForValue().get(Constant.USERS_CACHE_INIT);
-//        log.info(" cur length is : "+users);
     }
 
 }

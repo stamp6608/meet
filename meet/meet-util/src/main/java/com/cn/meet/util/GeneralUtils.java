@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -97,4 +98,19 @@ public class GeneralUtils {
     public static String buildToken(){
         return UUID.randomUUID().toString().replaceAll("-","");
     }
+
+    /**
+    * @Description: 获取String类型的值
+    * @Param: [obj]
+    * @return: java.lang.String
+    * @Author: Stamp.M
+    * @Date: 2019/3/28
+    */
+    public static String getStringValue(Object obj){
+        String res = Optional.ofNullable(obj)
+                .map(a -> String.valueOf(a))
+                .orElse("");
+        return res;
+    }
+
 }
