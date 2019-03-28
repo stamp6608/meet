@@ -7,9 +7,8 @@ import com.cn.meet.model.common.Constant;
 import com.cn.meet.util.AesEncryptUtils;
 import com.cn.meet.util.IPUtils;
 import com.google.common.collect.ImmutableList;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -22,10 +21,10 @@ import java.io.IOException;
  * @author: Stamp.M
  * @create: 2019-03-19 21:42
  **/
+@Slf4j
 @WebFilter(filterName = "requestWrapperFilter", urlPatterns = {"/*"})
 public class RequestWrapperFilter implements Filter {
 
-    Logger logger = LoggerFactory.getLogger(RequestWrapperFilter.class);
     //所有有效请求路径集合
     ImmutableList verfyPaths = new ImmutableList.Builder<String>()
             .add("/user/verify")
@@ -46,12 +45,12 @@ public class RequestWrapperFilter implements Filter {
             String servletPath = httpRequest.getRequestURI().toString();
             // 获取请求全IP地址
             String ip = IPUtils.getRealIp((HttpServletRequest)request, 1);
-            logger.info(" HttpServletRequest: IP:{}, MethodType:{}, ServletPath:{}", ip, methodType, servletPath);
+            log.info(" HttpServletRequest: IP:{}, MethodType:{}, ServletPath:{}", ip, methodType, servletPath);
             requestWrapper = new BodyRequestWrapper((HttpServletRequest) request);
             if(requestWrapper == null) return;
             //仅支持POST请求格式
             if(!StringUtils.equals(methodType,"POST")){
-                logger.error("不支持的请求方法: {}", methodType);
+                log.error("不支持的请求方法: {}", methodType);
                 requestWrapper.getSession().setAttribute(Constant.ERROR_SESSION_ENUM, ResponseCodeEnum.NON_SUPPORT_TYPE);
                 requestWrapper.getRequestDispatcher("/error/msg").forward(requestWrapper,response);
                 return;
@@ -63,14 +62,14 @@ public class RequestWrapperFilter implements Filter {
             requestWrapper.getRequestDispatcher("/error/msg").forward(requestWrapper,response);
             return;
         }
-        logger.info("<<< 解密前参数: {} >>>",json);
+        log.info("<<< 解密前参数: {} >>>",json);
         String paramStr;
         try{
             //参数解密
             paramStr = AesEncryptUtils.decrypt(json);
-            logger.info("<<< 解密后参数：{} >>>", paramStr);
+            log.info("<<< 解密后参数：{} >>>", paramStr);
         }catch (Exception e){
-            logger.error("参数解密失败... json:{}",json);
+            log.error("参数解密失败... json:{}",json);
             requestWrapper.getSession().setAttribute(Constant.ERROR_SESSION_ENUM, ResponseCodeEnum.DECRYPT_ERROR);
             requestWrapper.getRequestDispatcher("/error/msg").forward(requestWrapper,response);
             return;

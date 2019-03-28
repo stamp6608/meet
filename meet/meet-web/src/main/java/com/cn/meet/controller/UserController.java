@@ -15,7 +15,10 @@ import com.cn.meet.service.UserService;
 import com.cn.meet.util.DateUtils;
 import com.cn.meet.util.GeneralUtils;
 import com.cn.meet.util.IPUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,8 +36,16 @@ import java.util.Optional;
  **/
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 
+    // 仅支持String类型的缓存
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    // 支持多类型的数据缓存
+//    @Autowired
+//    private RedisTemplate<Object, Object> redisTemplate;
     @Resource
     private UserService userService;
 
@@ -231,13 +242,18 @@ public class UserController {
     @ResponseBody
     public ResponseEntity login(BodyRequestWrapper request) throws GeneralException {
         UserInfo3Req userReq = (UserInfo3Req) GeneralUtils.mapperParams(request, UserInfo3Req.class);
+        log.info("用户登陆......");
         //手机号是否注册过验证
         if (!userService.checkPhone(userReq.getTelephone()))
             throw GeneralException.initEnumGeneralException(ResponseCodeEnum.PHNOE_CHECK_ERROR);
         Token token = new Token();
         token.setTelephone(userReq.getTelephone());
         token.setToken(GeneralUtils.buildToken());
+        //redis 使用示例
+        redisTemplate.opsForValue().set("a","aa");
+        String a = redisTemplate.opsForValue().get("a");
         //todo 缓存token,用于过滤器中token校验
+
 
         //更新用户的经度和维度和token
         userService.updateUserLocation(userReq);
