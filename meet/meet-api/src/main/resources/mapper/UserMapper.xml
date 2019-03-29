@@ -58,7 +58,7 @@
     </select>
 
     <select id="getUserToken" resultType="java.lang.String" parameterType="java.lang.String">
-        select token from user where telephone=#{telephone} and online = '1'
+        select token from user where telephone=#{telephone}
     </select>
 
     <update id="updateUserLocation" parameterType="com.cn.meet.req.oracle.UserInfo3Req">
