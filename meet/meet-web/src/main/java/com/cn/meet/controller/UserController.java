@@ -295,7 +295,7 @@ public class UserController {
 
 
     /**
-     * @api {POST} http://url/user/logout  1.7搜索附近的人(指定半径内的在线用户)
+     * @api {POST} http://url/user/nearby  1.7搜索附近的人(指定半径内的在线用户)
      * @apiVersion 1.0.0
      * @apiGroup 1用户管理
      * @apiDescription 分页查询, 搜索附近的人(指定半径内的在线用户)
