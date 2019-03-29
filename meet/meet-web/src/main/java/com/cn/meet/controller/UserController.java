@@ -295,14 +295,6 @@ public class UserController {
 
 
     /**
-     * @Description: 1.7 搜索附近的人(指定半径内的在线用户)
-     * @Param: [radii, lon, lat]
-     * @return: List<UserPosition>
-     * @Author: Stamp.M
-     * @Date: 2019/3/28
-     */
-
-    /**
      * @api {POST} http://url/user/logout  1.7搜索附近的人(指定半径内的在线用户)
      * @apiVersion 1.0.0
      * @apiGroup 1用户管理
