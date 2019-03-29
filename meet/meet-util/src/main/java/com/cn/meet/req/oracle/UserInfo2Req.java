@@ -8,22 +8,11 @@ import com.cn.meet.annotations.ParamCheck;
  * @author: Stamp.M
  * @create: 2019-03-23 22:33
  **/
-public class UserInfo2Req {
+public class UserInfo2Req extends BaseReq{
 
-    //手机号
-    @ParamCheck
-    private String telephone;
     //别名
     @ParamCheck
     private String name;
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
 
     public String getName() {
         return name;

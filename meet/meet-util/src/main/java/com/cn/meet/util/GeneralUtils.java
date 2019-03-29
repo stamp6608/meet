@@ -6,7 +6,6 @@ import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.handler.BodyRequestWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,8 +54,8 @@ public class GeneralUtils {
                     field.setAccessible(true);
                     try {
                         // 获取属性值
-                        String val = (String) field.get(obj);
-                        if (StringUtils.isBlank(val))
+                        Object val = field.get(obj);
+                        if (val == null)
                             throw new GeneralException(ResponseCodeEnum.PARAMETER_CHECK_ERROR.getMessage(), ResponseCodeEnum.PARAMETER_CHECK_ERROR.getCode());
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();

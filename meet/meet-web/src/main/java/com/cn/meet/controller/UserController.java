@@ -8,10 +8,7 @@ import com.cn.meet.model.common.Constant;
 import com.cn.meet.model.common.ResponseEntity;
 import com.cn.meet.model.common.Token;
 import com.cn.meet.model.entity.UserInfoEntity;
-import com.cn.meet.req.oracle.PhoneInfoReq;
-import com.cn.meet.req.oracle.UserInfo2Req;
-import com.cn.meet.req.oracle.UserInfo3Req;
-import com.cn.meet.req.oracle.UserInfoReq;
+import com.cn.meet.req.oracle.*;
 import com.cn.meet.service.UserService;
 import com.cn.meet.util.DateUtils;
 import com.cn.meet.util.GeneralUtils;
@@ -26,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: meet
@@ -141,13 +140,13 @@ public class UserController {
      * @apiParam {String} expectType   期待类型 (NONE("无","0"), CHAT("聊天","1"), APPOINTMENT("约会", "2"),MAKE("交友","3"), NETCHAT("网聊","4"), FRIEND("朋友", "5"),HOOKUP("约炮","6"))
      * @apiParam {String} expectSex   期待约会性别 (MAN("男","1"), WOMAN("女","2"), APPOINTMENT("其它", "0"))
      * @apiParam {String} expectShape  期待约会体型 ( BALANCE("匀称","1"),NORMAL("一般","0"), CONCERT("协调", "2"),FAT("胖","3"),MUSCULAR("肌肉","4"), THIN("瘦", "5"),STRONG("强壮","6"))
-     * @apiParam {String} expectRace   期待约会种族 (OTHER("其它","0"), ASIA("亚洲","1"), AFRICA("非洲", "2"),LATIN("拉丁","3"),MIDDLE("中东","4"), MESTIZO("混血", "5"),AMERICA("美洲","6"),SOURCE("南亚", "5"),EUROPE("欧洲","6"))
+     * @apiParam {String} expectRace   期待约会种族 (OTHER("其它","0"), ASIA("亚洲","1"), AFRICA("非洲", "2"),LATIN("拉丁","3"),MIDDLE("中东","4"), MESTIZO("混血", "5"),AMERICA("美洲","6"),SOURCE("南亚", "7"),EUROPE("欧洲","8"))
      * @apiParam {String} expectAge   期待约会年龄
      * @apiParam {String} hobby       爱好 (NONE("无","0"), MOVIE("电影","1"), READ("读书", "2"),TV("电视","3"), MUSIC("音乐","4"),FAMILY("家庭", "5"),PET("宠物","6"),DIRINK("喝酒", "7"), HOTEL("旅馆","8"),SHOP("购物","9"), PHYSICAL("看体育节目", "10"),SPROTS("运动","11"),BAR("酒吧", "12"),DANCE("跳舞", "13"),GAME("游戏","14"))
      * @apiParam {String} religion    宗教 (NONE("无","0"), BUDDHIST("佛教","1"), CHRISTIAN("基督教", "2"),CATHOLIC("天主教","3"), SIKH("印度教","4"),ISLAMITE("伊斯兰教", "5"),OTHERS("其他教派","6"))
      * @apiParam {String} edutication 教育 (NONE("无","0"), HIGHSCHOOL("高中","1"), ACADEMIC("学院", "2"),COLLEAGE("本科","3"), JUNIOR("专科","4"),DOCTOR("博士", "5"),MASTER("硕士","6"))
      * @apiParam {String} smoke       吸烟/喝酒 (NEVER("从不","1"),SOMETIMES("偶尔","2"), USUALLY("经常", "3"), NONE("无", "0"))
-     * @apiParam {String} hasBaby     是否期待小孩 (NONE("无","1"),COHABIT("已育同住","2"), SEPARATION("已育分居", "0"),NOBABY("无小孩","1"), SINGLE("独身主义者","2"))
+     * @apiParam {String} hasBaby     是否期待小孩 (NONE("无","1"),COHABIT("已育同住","2"), SEPARATION("已育分居", "0"),NOBABY("无小孩","3"), SINGLE("独身主义者","4"))
      * @apiSuccessExample {Object}    返回成功
      * {
      * "code":0,
@@ -179,7 +178,6 @@ public class UserController {
      * @apiVersion 1.0.0
      * @apiGroup 1用户管理
      * @apiDescription 查询用户个人信息, 数字解析同1.3的参数定义，多选用","分割
-     * @apiParam {String} telephone   手机号
      * @apiParam {String} name 	      别名
      * @apiSuccessExample {Object}    返回成功
      * {
@@ -210,7 +208,10 @@ public class UserController {
      * "religion" : "3",               //宗教
      * "edutication" : "2",            //教育
      * "smoke" : "1",                  //吸烟/喝酒
-     * "hasBaby" : "0"                 //是否期待小孩
+     * "hasBaby" : "0",                //是否期待小孩
+     * "longitude" : 40.033075000000000,      //经度(BigDecimal 类型)
+     * "latitude" : 116.314168000000000,      //维度(BigDecimal 类型)
+     * "imgPath" : "url/path"          //图片路径
      * }
      * }
      * }
@@ -231,9 +232,9 @@ public class UserController {
      * @apiVersion 1.0.0
      * @apiGroup 1用户管理
      * @apiDescription 用户登陆
-     * @apiParam {String} telephone    手机号
-     * @apiParam {String} longitude    经度
-     * @apiParam {String} latitude 	   维度
+     * @apiParam {String}     telephone    手机号
+     * @apiParam {BigDecimal} longitude    经度
+     * @apiParam {BigDecimal} latitude 	   维度
      * @apiSuccessExample {Object}     返回成功
      * {
      * "code":0,
@@ -258,7 +259,7 @@ public class UserController {
         token.setTelephone(userReq.getTelephone());
         token.setToken(GeneralUtils.buildToken());
         log.info("用户{}登陆......, cur token : {}", userReq.getTelephone(), token.getToken());
-        redisTemplate.opsForValue().set(token.getTelephone()+ Constant.USER_TOKEN, token.getToken());
+        redisTemplate.opsForValue().set(token.getTelephone() + Constant.USER_TOKEN, token.getToken());
         //更新用户的经度和维度和token
         userReq.setToken(token.getToken());
         userService.updateUserLocation(userReq);
@@ -266,7 +267,83 @@ public class UserController {
     }
 
 
+    /**
+     * @api {POST} http://url/user/logout  1.6用户登出(用户注销)
+     * @apiVersion 1.0.0
+     * @apiGroup 1用户管理
+     * @apiDescription 用户登出(用户注销)
+     * @apiSuccessExample {Object}     返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":{}
+     * }
+     * </b>
+     * 加密此json对象后返回
+     */
+    @SecurityParameter
+    @PostMapping("/logout")
+    @ResponseBody
+    public ResponseEntity logout(BodyRequestWrapper request) throws GeneralException {
+        BaseReq userReq = (BaseReq) GeneralUtils.mapperParams(request, BaseReq.class);
+        log.info("用户{}注销......", userReq.getTelephone());
+        userService.logout(userReq);
+        redisTemplate.delete(userReq.getTelephone() + Constant.USER_TOKEN);
+        return ResponseEntity.initResponse();
+    }
 
+
+    /** 
+    * @Description: 1.7 搜索附近的人(在线)
+    * @Param: [radii, lon, lat] 
+    * @return: List<UserPosition> 
+    * @Author: Stamp.M 
+    * @Date: 2019/3/28 
+    */
+    @SecurityParameter
+    @PostMapping("/nearby")
+    @ResponseBody
+    public ResponseEntity getVicinity(BodyRequestWrapper request) throws GeneralException{
+        VicinityReq vicinity = (VicinityReq) GeneralUtils.mapperParams(request, VicinityReq.class);
+        log.info(" 搜索附近的人...... ");
+        double r = 6371;//地球半径千米
+        double radii = Double.valueOf(vicinity.getRadii());
+        double lat = Double.valueOf(vicinity.getLat());
+        double lon = Double.valueOf(vicinity.getLon());
+        double dis = radii;
+        double dlng =  2*Math.asin(Math.sin(dis/(2*r))/Math.cos(lat*Math.PI/180));
+        dlng = dlng*180/Math.PI;//角度转为弧度
+        double dlat = dis/r;
+        dlat = dlat*180/Math.PI;
+        double minlat =lat-dlat;
+        double maxlat = lat+dlat;
+        double minlng = lon -dlng;
+        double maxlng = lon + dlng;
+        List<UserInfoEntity> users = userService.getvicinity(BigDecimal.valueOf(minlng),
+                BigDecimal.valueOf(maxlng), BigDecimal.valueOf(minlat), BigDecimal.valueOf(maxlat));
+        return ResponseEntity.initSuccessResponse(users);
+    }
+
+
+
+    /** 
+    * @Description: 1.8 搜索附近的人排序
+    * @Param: [request] 
+    * @return: com.cn.meet.model.common.ResponseEntity 
+    * @Author: Stamp.M 
+    * @Date: 2019/3/28 
+    */ 
+    @SecurityParameter
+    @PostMapping("/nearbysort")
+    @ResponseBody
+    public ResponseEntity getVicinitySort(BodyRequestWrapper request) throws GeneralException{
+        VicinityReq2 vicinity = (VicinityReq2) GeneralUtils.mapperParams(request, VicinityReq2.class);
+        log.info(" 搜索附近的人排序...... ");
+        double lat = Double.valueOf(vicinity.getLat());
+        double lon = Double.valueOf(vicinity.getLon());
+        List<UserInfoEntity> users = userService.getvicinitysort(BigDecimal.valueOf(lon), BigDecimal.valueOf(lat));
+        return ResponseEntity.initSuccessResponse(users);
+    }
 
 
 }

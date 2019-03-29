@@ -2,6 +2,8 @@ package com.cn.meet.req.oracle;
 
 import com.cn.meet.annotations.ParamCheck;
 
+import java.math.BigDecimal;
+
 /**
  * @program: meet
  * @description: 用户登陆
@@ -15,10 +17,10 @@ public class UserInfo3Req {
     private String telephone;
     //经度
     @ParamCheck
-    private String longitude;
+    private BigDecimal longitude;
     //维度
     @ParamCheck
-    private String latitude;
+    private BigDecimal latitude;
     //登陆成功的令牌
     private String token;
 
@@ -39,19 +41,19 @@ public class UserInfo3Req {
         this.telephone = telephone;
     }
 
-    public String getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 }

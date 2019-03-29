@@ -1,6 +1,7 @@
 package com.cn.meet.model.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @program: meet
@@ -56,9 +57,9 @@ public class UserInfoEntity implements Serializable{
     //是否期待小孩
     private String hasBaby;
     //经度
-    private String longitude;
+    private BigDecimal longitude;
     //维度
-    private String latitude;
+    private BigDecimal latitude;
     //登陆成功的令牌
     private String token;
     //图片路径
@@ -72,19 +73,19 @@ public class UserInfoEntity implements Serializable{
         this.imgPath = imgPath;
     }
 
-    public String getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 

@@ -17,6 +17,9 @@ public class Constant {
     public static final String USERS_CACHE_INIT="initUserCache";
     //token 缓存
     public static final String USER_TOKEN = "userToken";
+    //搜索附近的人距离1 单位米
+    public static final Integer DISTANCE_LONG1 = 3000;
+
 
 
 }

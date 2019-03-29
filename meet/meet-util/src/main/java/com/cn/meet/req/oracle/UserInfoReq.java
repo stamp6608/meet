@@ -74,12 +74,6 @@ public class UserInfoReq {
     //是否期待小孩
     @ParamCheck
     private String hasBaby;
-    //经度
-    @ParamCheck
-    private String longitude;
-    //维度
-    @ParamCheck
-    private String latitude;
     //图片地址
     private String imgPath;
     //创建时间
@@ -88,22 +82,6 @@ public class UserInfoReq {
     private int updateTime;
     //注册IP
     private String ip;
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
 
     public String getCity() {
         return city;

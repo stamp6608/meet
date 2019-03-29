@@ -4,14 +4,12 @@ import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.mapper.UserMapper;
 import com.cn.meet.model.entity.UserInfoEntity;
-import com.cn.meet.req.oracle.PhoneInfoReq;
-import com.cn.meet.req.oracle.UserInfo2Req;
-import com.cn.meet.req.oracle.UserInfo3Req;
-import com.cn.meet.req.oracle.UserInfoReq;
+import com.cn.meet.req.oracle.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -119,6 +117,42 @@ public class UserService {
     public void updateUserLocation(UserInfo3Req userInfoReq) throws GeneralException{
         Integer res = userMapper.updateUserLocation(userInfoReq);
         if(res != 1) throw GeneralException.initEnumGeneralException(ResponseCodeEnum.INNER_ERROR);
+    }
+
+    /** 
+    * @Description: 用户注销
+    * @Param: [userInfoReq] 
+    * @return: void 
+    * @Author: Stamp.M 
+    * @Date: 2019/3/29 
+    */ 
+    @Transactional
+    public void logout(BaseReq userInfoReq) throws GeneralException{
+        Integer res = userMapper.logout(userInfoReq);
+        if(res != 1) throw GeneralException.initEnumGeneralException(ResponseCodeEnum.INNER_ERROR);
+    }
+
+
+    /** 
+    * @Description: 搜索附近的人(在线) 
+    * @Param: [minlng, maxlng, minlat, maxlat] 
+    * @return: java.util.List<com.cn.meet.model.entity.UserInfoEntity> 
+    * @Author: Stamp.M 
+    * @Date: 2019/3/29 
+    */ 
+    public List<UserInfoEntity> getvicinity(BigDecimal minlng, BigDecimal maxlng, BigDecimal minlat, BigDecimal maxlat){
+        return userMapper.getvicinity(minlng, maxlng, minlat, maxlat);
+    }
+
+    /**
+     * @Description: 搜索附近的人(在线)
+     * @Param: [longitude, latitude]
+     * @return: java.util.List<com.cn.meet.model.entity.UserInfoEntity>
+     * @Author: Stamp.M
+     * @Date: 2019/3/29
+     */
+    public List<UserInfoEntity> getvicinitysort(BigDecimal longitude, BigDecimal latitude){
+        return userMapper.getvicinitysort(longitude, latitude);
     }
 
 }

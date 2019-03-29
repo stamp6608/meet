@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  * @create: 2019-03-17 22:12
  **/
 public enum Baby {
-    NONE("无","1"),COHABIT("已育同住","2"), SEPARATION("已育分居", "0"),NOBABY("无小孩","1"), SINGLE("独身主义者","2");
+    NONE("无","1"),COHABIT("已育同住","2"), SEPARATION("已育分居", "0"),NOBABY("无小孩","4"), SINGLE("独身主义者","5");
 
     private Baby(String name, String index){
         this.name=name;

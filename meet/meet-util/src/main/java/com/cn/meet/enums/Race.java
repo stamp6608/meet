@@ -11,8 +11,8 @@ import org.apache.commons.lang3.StringUtils;
  **/
 public enum Race {
     OTHER("其它","0"), ASIA("亚洲","1"), AFRICA("非洲", "2"),LATIN("拉丁","3"),
-    MIDDLE("中东","4"), MESTIZO("混血", "5"),AMERICA("美洲","6"),SOURCE("南亚", "5"),
-    EUROPE("欧洲","6");
+    MIDDLE("中东","4"), MESTIZO("混血", "5"),AMERICA("美洲","6"),SOURCE("南亚", "7"),
+    EUROPE("欧洲","8");
     private Race(String name, String index){
         this.name=name;
         this.index=index;
