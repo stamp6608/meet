@@ -1,4 +1,4 @@
-package com.cn.meet.req.oracle;
+package com.cn.meet.model.entity;
 
 /**
  * @program: meet
@@ -6,30 +6,30 @@ package com.cn.meet.req.oracle;
  * @author: Stamp.M
  * @create: 2019-03-28 18:42
  **/
-public class BaseReq {
+public class BaseEntity {
     //手机号
     private String telephone;
     //登陆成功的令牌
     private String token;
-    //页码
-    private Integer page;
-    //页数
-    private Integer pageSize;
+    //条目数
+    private Integer size;
+    //最大条目数
+    private Integer max;
 
-    public Integer getPage() {
-        return page;
+    public Integer getSize() {
+        return size;
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
-    public Integer getPageSize() {
-        return pageSize;
+    public Integer getMax() {
+        return max;
     }
 
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+    public void setMax(Integer max) {
+        this.max = max;
     }
 
     public String getTelephone() {

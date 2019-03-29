@@ -8,6 +8,7 @@ import com.cn.meet.model.common.Constant;
 import com.cn.meet.model.common.ResponseEntity;
 import com.cn.meet.model.common.Token;
 import com.cn.meet.model.entity.UserInfoEntity;
+import com.cn.meet.model.entity.Vicinity;
 import com.cn.meet.req.oracle.*;
 import com.cn.meet.service.UserService;
 import com.cn.meet.util.DateUtils;
@@ -293,17 +294,68 @@ public class UserController {
     }
 
 
-    /** 
-    * @Description: 1.7 搜索附近的人(在线)
-    * @Param: [radii, lon, lat] 
-    * @return: List<UserPosition> 
-    * @Author: Stamp.M 
-    * @Date: 2019/3/28 
-    */
+    /**
+     * @Description: 1.7 搜索附近的人(指定半径内的在线用户)
+     * @Param: [radii, lon, lat]
+     * @return: List<UserPosition>
+     * @Author: Stamp.M
+     * @Date: 2019/3/28
+     */
+
+    /**
+     * @api {POST} http://url/user/logout  1.7搜索附近的人(指定半径内的在线用户)
+     * @apiVersion 1.0.0
+     * @apiGroup 1用户管理
+     * @apiDescription 分页查询, 搜索附近的人(指定半径内的在线用户)
+     * @apiParam {String}   radii    半径距离(单位km)
+     * @apiParam {String}   lon      经度
+     * @apiParam {String}   lat 	 维度
+     * @apiParam {Integer}  page     页码
+     * @apiParam {Integer}  pageSize 页数
+     * @apiSuccessExample {Object}     返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":[
+     * {
+     * "telephone" : "7490309389",
+     * "language" : "English",
+     * "country" : "Philippines",
+     * "aliasName" : "测试下",
+     * "birthday" : "10/5",
+     * "weight" : "55-70",
+     * "sex" : "1",
+     * "shape" : "2",
+     * "race" : "3",
+     * "emotion" : "3",
+     * "selfIntroduction" : "第一次来玩，请大家多多关照",
+     * "expectType" : "1,2",
+     * "expectSex" : "1,2",
+     * "expectShape" : "1,3,4",
+     * "expectRace" : "2,3",
+     * "expectAge" : "30-50",
+     * "city" : null,
+     * "hobby" : "2,4,5",
+     * "religion" : "3",
+     * "edutication" : "2",
+     * "smoke" : "1",
+     * "hasBaby" : "0",
+     * "longitude" : 116.310127000000000,  //经度
+     * "latitude" : 40.064379000000000,    //维度
+     * "token" : "29ec759ab7e84f119286831e335b69f1", //忽略
+     * "imgPath" : null
+     * }
+     * ......
+     * ]
+     * }
+     * </b>
+     * 加密此json对象后返回
+     */
+
     @SecurityParameter
     @PostMapping("/nearby")
     @ResponseBody
-    public ResponseEntity getVicinity(BodyRequestWrapper request) throws GeneralException{
+    public ResponseEntity getVicinity(BodyRequestWrapper request) throws GeneralException {
         VicinityReq vicinity = (VicinityReq) GeneralUtils.mapperParams(request, VicinityReq.class);
         log.info(" 搜索附近的人...... ");
         double r = 6371;//地球半径千米
@@ -311,32 +363,40 @@ public class UserController {
         double lat = Double.valueOf(vicinity.getLat());
         double lon = Double.valueOf(vicinity.getLon());
         double dis = radii;
-        double dlng =  2*Math.asin(Math.sin(dis/(2*r))/Math.cos(lat*Math.PI/180));
-        dlng = dlng*180/Math.PI;//角度转为弧度
-        double dlat = dis/r;
-        dlat = dlat*180/Math.PI;
-        double minlat =lat-dlat;
-        double maxlat = lat+dlat;
-        double minlng = lon -dlng;
+        double dlng = 2 * Math.asin(Math.sin(dis / (2 * r)) / Math.cos(lat * Math.PI / 180));
+        dlng = dlng * 180 / Math.PI;//角度转为弧度
+        double dlat = dis / r;
+        dlat = dlat * 180 / Math.PI;
+        double minlat = lat - dlat;
+        double maxlat = lat + dlat;
+        double minlng = lon - dlng;
         double maxlng = lon + dlng;
-        List<UserInfoEntity> users = userService.getvicinity(BigDecimal.valueOf(minlng),
-                BigDecimal.valueOf(maxlng), BigDecimal.valueOf(minlat), BigDecimal.valueOf(maxlat));
+        Integer page = vicinity.getPage();
+        Integer pageSize = vicinity.getPageSize();
+        Vicinity vici = new Vicinity();
+        vici.setTelephone(vicinity.getTelephone());
+        vici.setMax((page - 1) * pageSize);
+        vici.setSize(pageSize);
+        vici.setMinlng(BigDecimal.valueOf(minlng));
+        vici.setMaxlng(BigDecimal.valueOf(maxlng));
+        vici.setMinlat(BigDecimal.valueOf(minlat));
+        vici.setMaxlat(BigDecimal.valueOf(maxlat));
+        List<UserInfoEntity> users = userService.getvicinity(vici);
         return ResponseEntity.initSuccessResponse(users);
     }
 
 
-
-    /** 
-    * @Description: 1.8 搜索附近的人排序
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/3/28 
-    */ 
+    /**
+     * @Description: 1.8 搜索附近的人排序
+     * @Param: [request]
+     * @return: com.cn.meet.model.common.ResponseEntity
+     * @Author: Stamp.M
+     * @Date: 2019/3/28
+     */
     @SecurityParameter
     @PostMapping("/nearbysort")
     @ResponseBody
-    public ResponseEntity getVicinitySort(BodyRequestWrapper request) throws GeneralException{
+    public ResponseEntity getVicinitySort(BodyRequestWrapper request) throws GeneralException {
         VicinityReq2 vicinity = (VicinityReq2) GeneralUtils.mapperParams(request, VicinityReq2.class);
         log.info(" 搜索附近的人排序...... ");
         double lat = Double.valueOf(vicinity.getLat());

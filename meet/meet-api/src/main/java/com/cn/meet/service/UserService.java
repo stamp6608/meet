@@ -4,6 +4,7 @@ import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.mapper.UserMapper;
 import com.cn.meet.model.entity.UserInfoEntity;
+import com.cn.meet.model.entity.Vicinity;
 import com.cn.meet.req.oracle.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -140,8 +141,8 @@ public class UserService {
     * @Author: Stamp.M 
     * @Date: 2019/3/29 
     */ 
-    public List<UserInfoEntity> getvicinity(BigDecimal minlng, BigDecimal maxlng, BigDecimal minlat, BigDecimal maxlat){
-        return userMapper.getvicinity(minlng, maxlng, minlat, maxlat);
+    public List<UserInfoEntity> getvicinity(Vicinity vici){
+        return userMapper.getvicinity(vici);
     }
 
     /**
