@@ -378,6 +378,8 @@ public class UserController {
     }
 
 
+    // todo 1.7接口差距离字段； 还缺文件批量上传和下载接口
+
     /**
      * @Description: 1.8 搜索附近的人排序
      * @Param: [request]
