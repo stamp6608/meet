@@ -13,13 +13,6 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "telephone",
-            "description": "<p>手机号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
             "field": "name",
             "description": "<p>别名</p>"
           }
@@ -30,7 +23,7 @@
       "examples": [
         {
           "title": "返回成功",
-          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":{\n\"code\" : 200,\n\"message\" : \"success\",\n\"data\" : {\n\"telephone\" : \"9847098888\",     //手机号\n\"language\" : \"English\",         //语种\n\"country\" : \"Philippines\",      //国家\n\"aliasName\" : \"marry\",          //别名\n\"birthday\" : \"10/5\",            //生日\n\"weight\" : \"55-70\",             //身高/体重\n\"sex\" : \"1\",                    //性别\n\"shape\" : \"2\",                  //体型\n\"race\" : \"3\",                   //种族\n\"emotion\" : \"3\",                //情感状况\n\"selfIntroduction\" : \"你好\",     //自我介绍\n\"expectType\" : \"1,2\",           //期待类型\n\"expectSex\" : \"1,2\",            //期待约会性别\n\"expectShape\" : \"1,3,4\",        //期待约会体型\n\"expectRace\" : \"2,3\",           //期待约会种族\n\"expectAge\" : \"30-50\",          //期待约会年龄\n\"city\" : \"Makaty\",              //城市\n\"hobby\" : \"2,4,5\",              //爱好\n\"religion\" : \"3\",               //宗教\n\"edutication\" : \"2\",            //教育\n\"smoke\" : \"1\",                  //吸烟/喝酒\n\"hasBaby\" : \"0\"                 //是否期待小孩\n}\n}\n}\n</b>\n加密此json对象后返回",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":{\n\"code\" : 200,\n\"message\" : \"success\",\n\"data\" : {\n\"telephone\" : \"9847098888\",     //手机号\n\"language\" : \"English\",         //语种\n\"country\" : \"Philippines\",      //国家\n\"aliasName\" : \"marry\",          //别名\n\"birthday\" : \"10/5\",            //生日\n\"weight\" : \"55-70\",             //身高/体重\n\"sex\" : \"1\",                    //性别\n\"shape\" : \"2\",                  //体型\n\"race\" : \"3\",                   //种族\n\"emotion\" : \"3\",                //情感状况\n\"selfIntroduction\" : \"你好\",     //自我介绍\n\"expectType\" : \"1,2\",           //期待类型\n\"expectSex\" : \"1,2\",            //期待约会性别\n\"expectShape\" : \"1,3,4\",        //期待约会体型\n\"expectRace\" : \"2,3\",           //期待约会种族\n\"expectAge\" : \"30-50\",          //期待约会年龄\n\"city\" : \"Makaty\",              //城市\n\"hobby\" : \"2,4,5\",              //爱好\n\"religion\" : \"3\",               //宗教\n\"edutication\" : \"2\",            //教育\n\"smoke\" : \"1\",                  //吸烟/喝酒\n\"hasBaby\" : \"0\",                //是否期待小孩\n\"longitude\" : 40.033075000000000,      //经度(BigDecimal 类型)\n\"latitude\" : 116.314168000000000,      //维度(BigDecimal 类型)\n\"imgPath\" : \"url/path\"，          //图片路径\n}\n}\n}\n</b>\n加密此json对象后返回",
           "type": "Object"
         }
       ]
@@ -58,14 +51,14 @@
           },
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "BigDecimal",
             "optional": false,
             "field": "longitude",
             "description": "<p>经度</p>"
           },
           {
             "group": "Parameter",
-            "type": "String",
+            "type": "BigDecimal",
             "optional": false,
             "field": "latitude",
             "description": "<p>维度</p>"
@@ -85,6 +78,141 @@
     "filename": "./controller/UserController.java",
     "groupTitle": "1用户管理",
     "name": "PostHttpUrlUserLogin"
+  },
+  {
+    "type": "POST",
+    "url": "http://url/user/logout",
+    "title": "1.6用户登出(用户注销)",
+    "version": "1.0.0",
+    "group": "1用户管理",
+    "description": "<p>用户登出(用户注销)</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":{}\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "./controller/UserController.java",
+    "groupTitle": "1用户管理",
+    "name": "PostHttpUrlUserLogout"
+  },
+  {
+    "type": "POST",
+    "url": "http://url/user/nearby",
+    "title": "1.7搜索附近的人(指定半径内的在线用户)",
+    "version": "1.0.0",
+    "group": "1用户管理",
+    "description": "<p>分页查询, 搜索附近的人(指定半径内的在线用户)</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "radii",
+            "description": "<p>半径距离(单位km)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lon",
+            "description": "<p>经度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lat",
+            "description": "<p>维度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>页数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":[\n{\n\"telephone\" : \"7490309389\",\n\"language\" : \"English\",\n\"country\" : \"Philippines\",\n\"aliasName\" : \"测试下\",\n\"birthday\" : \"10/5\",\n\"weight\" : \"55-70\",\n\"sex\" : \"1\",\n\"shape\" : \"2\",\n\"race\" : \"3\",\n\"emotion\" : \"3\",\n\"selfIntroduction\" : \"第一次来玩，请大家多多关照\",\n\"expectType\" : \"1,2\",\n\"expectSex\" : \"1,2\",\n\"expectShape\" : \"1,3,4\",\n\"expectRace\" : \"2,3\",\n\"expectAge\" : \"30-50\",\n\"city\" : null,\n\"hobby\" : \"2,4,5\",\n\"religion\" : \"3\",\n\"edutication\" : \"2\",\n\"smoke\" : \"1\",\n\"hasBaby\" : \"0\",\n\"longitude\" : 116.310127000000000,  //经度\n\"latitude\" : 40.064379000000000,    //维度\n\"token\" : \"29ec759ab7e84f119286831e335b69f1\", //忽略\n\"imgPath\" : null,\n\"distance\" : \"264\"        //距离(单位m)\n}\n......\n]\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "./controller/UserController.java",
+    "groupTitle": "1用户管理",
+    "name": "PostHttpUrlUserNearby"
+  },
+  {
+    "type": "POST",
+    "url": "http://url/user/nearbysort",
+    "title": "1.8搜索附近的人排序(由近及远查询)",
+    "version": "1.0.0",
+    "group": "1用户管理",
+    "description": "<p>分页查询, 搜索附近的人排序(由近及远查询)</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lon",
+            "description": "<p>经度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lat",
+            "description": "<p>维度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>页数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":[\n{\n\"telephone\" : \"7490309389\",\n\"language\" : \"English\",\n\"country\" : \"Philippines\",\n\"aliasName\" : \"测试下\",\n\"birthday\" : \"10/5\",\n\"weight\" : \"55-70\",\n\"sex\" : \"1\",\n\"shape\" : \"2\",\n\"race\" : \"3\",\n\"emotion\" : \"3\",\n\"selfIntroduction\" : \"第一次来玩，请大家多多关照\",\n\"expectType\" : \"1,2\",\n\"expectSex\" : \"1,2\",\n\"expectShape\" : \"1,3,4\",\n\"expectRace\" : \"2,3\",\n\"expectAge\" : \"30-50\",\n\"city\" : null,\n\"hobby\" : \"2,4,5\",\n\"religion\" : \"3\",\n\"edutication\" : \"2\",\n\"smoke\" : \"1\",\n\"hasBaby\" : \"0\",\n\"longitude\" : 116.310127000000000,  //经度\n\"latitude\" : 40.064379000000000,    //维度\n\"token\" : \"29ec759ab7e84f119286831e335b69f1\", //忽略\n\"imgPath\" : null,\n\"distance\" : \"264.0\"       //(单位m)\n}\n......\n]\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "./controller/UserController.java",
+    "groupTitle": "1用户管理",
+    "name": "PostHttpUrlUserNearbysort"
   },
   {
     "type": "POST",
@@ -206,7 +334,7 @@
             "type": "String",
             "optional": false,
             "field": "expectRace",
-            "description": "<p>期待约会种族 (OTHER(&quot;其它&quot;,&quot;0&quot;), ASIA(&quot;亚洲&quot;,&quot;1&quot;), AFRICA(&quot;非洲&quot;, &quot;2&quot;),LATIN(&quot;拉丁&quot;,&quot;3&quot;),MIDDLE(&quot;中东&quot;,&quot;4&quot;), MESTIZO(&quot;混血&quot;, &quot;5&quot;),AMERICA(&quot;美洲&quot;,&quot;6&quot;),SOURCE(&quot;南亚&quot;, &quot;5&quot;),EUROPE(&quot;欧洲&quot;,&quot;6&quot;))</p>"
+            "description": "<p>期待约会种族 (OTHER(&quot;其它&quot;,&quot;0&quot;), ASIA(&quot;亚洲&quot;,&quot;1&quot;), AFRICA(&quot;非洲&quot;, &quot;2&quot;),LATIN(&quot;拉丁&quot;,&quot;3&quot;),MIDDLE(&quot;中东&quot;,&quot;4&quot;), MESTIZO(&quot;混血&quot;, &quot;5&quot;),AMERICA(&quot;美洲&quot;,&quot;6&quot;),SOURCE(&quot;南亚&quot;, &quot;7&quot;),EUROPE(&quot;欧洲&quot;,&quot;8&quot;))</p>"
           },
           {
             "group": "Parameter",
@@ -248,7 +376,7 @@
             "type": "String",
             "optional": false,
             "field": "hasBaby",
-            "description": "<p>是否期待小孩 (NONE(&quot;无&quot;,&quot;1&quot;),COHABIT(&quot;已育同住&quot;,&quot;2&quot;), SEPARATION(&quot;已育分居&quot;, &quot;0&quot;),NOBABY(&quot;无小孩&quot;,&quot;1&quot;), SINGLE(&quot;独身主义者&quot;,&quot;2&quot;))</p>"
+            "description": "<p>是否期待小孩 (NONE(&quot;无&quot;,&quot;1&quot;),COHABIT(&quot;已育同住&quot;,&quot;2&quot;), SEPARATION(&quot;已育分居&quot;, &quot;0&quot;),NOBABY(&quot;无小孩&quot;,&quot;3&quot;), SINGLE(&quot;独身主义者&quot;,&quot;4&quot;))</p>"
           }
         ]
       }

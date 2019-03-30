@@ -380,7 +380,7 @@ public class UserController {
     }
 
     /**
-     * @api {POST} http://url/user/nearby  1.8搜索附近的人排序(由近及远查询)
+     * @api {POST} http://url/user/nearbysort  1.8搜索附近的人排序(由近及远查询)
      * @apiVersion 1.0.0
      * @apiGroup 1用户管理
      * @apiDescription 分页查询, 搜索附近的人排序(由近及远查询)
