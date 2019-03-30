@@ -336,7 +336,7 @@ public class UserController {
      * "latitude" : 40.064379000000000,    //维度
      * "token" : "29ec759ab7e84f119286831e335b69f1", //忽略
      * "imgPath" : null,
-     * "distance" : "3.563474E-6"        //距离(单位km)
+     * "distance" : "264"        //距离(单位m)
      * }
      * ......
      * ]
@@ -388,7 +388,7 @@ public class UserController {
      * @apiParam {String}   lat 	 维度
      * @apiParam {Integer}  page     页码
      * @apiParam {Integer}  pageSize 页数
-     * @apiSuccessExample  {Object}  返回成功
+     * @apiSuccessExample {Object}  返回成功
      * {
      * "code":0,
      * "message:"success",
@@ -420,7 +420,7 @@ public class UserController {
      * "latitude" : 40.064379000000000,    //维度
      * "token" : "29ec759ab7e84f119286831e335b69f1", //忽略
      * "imgPath" : null,
-     * "distance" : "3.563474E-6"       //(单位km)
+     * "distance" : "264.0"       //(单位m)
      * }
      * ......
      * ]
