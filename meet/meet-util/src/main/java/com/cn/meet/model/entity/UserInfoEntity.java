@@ -64,6 +64,16 @@ public class UserInfoEntity implements Serializable{
     private String token;
     //图片路径
     private String imgPath;
+    //距离
+    private String distance;
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
 
     public String getImgPath() {
         return imgPath;

@@ -28,6 +28,7 @@
         <result column="longitude" property="longitude"/>
         <result column="latitude" property="latitude"/>
         <result column="imgPath" property="imgPath"/>
+
     </resultMap>
 
 
@@ -70,15 +71,14 @@
     </select>
 
     <select id="getvicinity" resultMap="users" parameterType="com.cn.meet.model.entity.Vicinity">
-        select * from user where longitude &gt;= #{minlng} and longitude &lt;= #{maxlng} and latitude &gt;= #{minlat}
+        select *, (POWER(MOD(ABS(longitude - #{longitude}),360),2) + POWER(ABS(latitude - #{latitude}),2)) AS distance
+        from user where longitude &gt;= #{minlng} and longitude &lt;= #{maxlng} and latitude &gt;= #{minlat}
         and latitude &lt;= #{maxlat} and telephone != #{telephone} and online = '1' ORDER by id ASC limit #{max}, #{size}
     </select>
 
     <select id="getvicinitysort" resultMap="users">
-        SELECT id, city, position, longitude,latitude,
-        (POWER(MOD(ABS(longitude - #{longitude}),360),2) + POWER(ABS(latitude - #{latitude}),2)) AS distance
-        FROM `userposition`
-        ORDER BY distance LIMIT 20
+        SELECT *, (POWER(MOD(ABS(longitude - #{longitude}),360),2) + POWER(ABS(latitude - #{latitude}),2)) AS distance
+        FROM user WHERE telephone != #{telephone} and online = '1' ORDER BY distance ASC LIMIT #{max}, #{size}
     </select>
 
     <update id="logout" parameterType="com.cn.meet.req.oracle.BaseReq">

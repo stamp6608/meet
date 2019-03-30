@@ -5,9 +5,7 @@ import com.cn.meet.model.entity.UserInfoEntity;
 import com.cn.meet.model.entity.Vicinity;
 import com.cn.meet.req.oracle.*;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper
@@ -22,6 +20,5 @@ public interface UserMapper {
      Integer updateUserLocation(UserInfo3Req userInfoReq);
      Integer logout(BaseReq baseReq);
      List<UserInfoEntity> getvicinity(Vicinity vici);
-     List<UserInfoEntity> getvicinitysort(@Param("longitude") BigDecimal longitude,
-                                       @Param("latitude") BigDecimal latitude);
+     List<UserInfoEntity> getvicinitysort(Vicinity vici);
 }

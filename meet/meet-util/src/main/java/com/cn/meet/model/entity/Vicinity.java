@@ -17,6 +17,26 @@ public class Vicinity extends BaseEntity{
     private BigDecimal minlat;
     //最小维度
     private BigDecimal maxlat;
+    //经度
+    private BigDecimal longitude;
+    //维度
+    private BigDecimal latitude;
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
 
     public BigDecimal getMinlng() {
         return minlng;

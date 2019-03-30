@@ -212,7 +212,7 @@ public class UserController {
      * "hasBaby" : "0",                //是否期待小孩
      * "longitude" : 40.033075000000000,      //经度(BigDecimal 类型)
      * "latitude" : 116.314168000000000,      //维度(BigDecimal 类型)
-     * "imgPath" : "url/path"          //图片路径
+     * "imgPath" : "url/path"，          //图片路径
      * }
      * }
      * }
@@ -335,7 +335,8 @@ public class UserController {
      * "longitude" : 116.310127000000000,  //经度
      * "latitude" : 40.064379000000000,    //维度
      * "token" : "29ec759ab7e84f119286831e335b69f1", //忽略
-     * "imgPath" : null
+     * "imgPath" : null,
+     * "distance" : "3.563474E-6"        //距离(单位km)
      * }
      * ......
      * ]
@@ -343,7 +344,6 @@ public class UserController {
      * </b>
      * 加密此json对象后返回
      */
-
     @SecurityParameter
     @PostMapping("/nearby")
     @ResponseBody
@@ -373,29 +373,76 @@ public class UserController {
         vici.setMaxlng(BigDecimal.valueOf(maxlng));
         vici.setMinlat(BigDecimal.valueOf(minlat));
         vici.setMaxlat(BigDecimal.valueOf(maxlat));
+        vici.setLatitude(new BigDecimal(vicinity.getLat()));
+        vici.setLongitude(new BigDecimal(vicinity.getLon()));
         List<UserInfoEntity> users = userService.getvicinity(vici);
         return ResponseEntity.initSuccessResponse(users);
     }
 
-
-    // todo 1.7接口差距离字段； 还缺文件批量上传和下载接口
-
     /**
-     * @Description: 1.8 搜索附近的人排序
-     * @Param: [request]
-     * @return: com.cn.meet.model.common.ResponseEntity
-     * @Author: Stamp.M
-     * @Date: 2019/3/28
+     * @api {POST} http://url/user/nearby  1.8搜索附近的人排序(由近及远查询)
+     * @apiVersion 1.0.0
+     * @apiGroup 1用户管理
+     * @apiDescription 分页查询, 搜索附近的人排序(由近及远查询)
+     * @apiParam {String}   lon      经度
+     * @apiParam {String}   lat 	 维度
+     * @apiParam {Integer}  page     页码
+     * @apiParam {Integer}  pageSize 页数
+     * @apiSuccessExample  {Object}  返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":[
+     * {
+     * "telephone" : "7490309389",
+     * "language" : "English",
+     * "country" : "Philippines",
+     * "aliasName" : "测试下",
+     * "birthday" : "10/5",
+     * "weight" : "55-70",
+     * "sex" : "1",
+     * "shape" : "2",
+     * "race" : "3",
+     * "emotion" : "3",
+     * "selfIntroduction" : "第一次来玩，请大家多多关照",
+     * "expectType" : "1,2",
+     * "expectSex" : "1,2",
+     * "expectShape" : "1,3,4",
+     * "expectRace" : "2,3",
+     * "expectAge" : "30-50",
+     * "city" : null,
+     * "hobby" : "2,4,5",
+     * "religion" : "3",
+     * "edutication" : "2",
+     * "smoke" : "1",
+     * "hasBaby" : "0",
+     * "longitude" : 116.310127000000000,  //经度
+     * "latitude" : 40.064379000000000,    //维度
+     * "token" : "29ec759ab7e84f119286831e335b69f1", //忽略
+     * "imgPath" : null,
+     * "distance" : "3.563474E-6"       //(单位km)
+     * }
+     * ......
+     * ]
+     * }
+     * </b>
+     * 加密此json对象后返回
      */
     @SecurityParameter
     @PostMapping("/nearbysort")
     @ResponseBody
     public ResponseEntity getVicinitySort(BodyRequestWrapper request) throws GeneralException {
         VicinityReq2 vicinity = (VicinityReq2) GeneralUtils.mapperParams(request, VicinityReq2.class);
-        log.info(" 搜索附近的人排序...... ");
-        double lat = Double.valueOf(vicinity.getLat());
-        double lon = Double.valueOf(vicinity.getLon());
-        List<UserInfoEntity> users = userService.getvicinitysort(BigDecimal.valueOf(lon), BigDecimal.valueOf(lat));
+        log.info(" 搜索附近的人排序，由近及远...... ");
+        Integer page = vicinity.getPage();
+        Integer pageSize = vicinity.getPageSize();
+        Vicinity vici = new Vicinity();
+        vici.setTelephone(vicinity.getTelephone());
+        vici.setMax((page - 1) * pageSize);
+        vici.setSize(pageSize);
+        vici.setLatitude(new BigDecimal(vicinity.getLat()));
+        vici.setLongitude(new BigDecimal(vicinity.getLon()));
+        List<UserInfoEntity> users = userService.getvicinitysort(vici);
         return ResponseEntity.initSuccessResponse(users);
     }
 

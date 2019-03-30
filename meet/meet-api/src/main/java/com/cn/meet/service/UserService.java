@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -152,8 +151,8 @@ public class UserService {
      * @Author: Stamp.M
      * @Date: 2019/3/29
      */
-    public List<UserInfoEntity> getvicinitysort(BigDecimal longitude, BigDecimal latitude){
-        return userMapper.getvicinitysort(longitude, latitude);
+    public List<UserInfoEntity> getvicinitysort(Vicinity vici){
+        return userMapper.getvicinitysort(vici);
     }
 
 }
