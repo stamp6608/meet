@@ -8,17 +8,17 @@ import com.cn.meet.enums.ResponseCodeEnum;
  * @author: Stamp.M
  * @create: 2019-03-19 22:33
  **/
-public class ResponseEntity {
+public class ResponseEntity<T> {
     private Integer code;
     private String message;
-    private Object data;
+    private T data;
 
     public ResponseEntity(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public ResponseEntity(Integer code, String message, Object data) {
+    public ResponseEntity(Integer code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -29,11 +29,11 @@ public class ResponseEntity {
     }
 
     public static ResponseEntity initResponse() {
-        return new ResponseEntity(ResponseCodeEnum.SUCCESS_CODE.getCode(), ResponseCodeEnum.SUCCESS_CODE.getMessage());
+        return new ResponseEntity(ResponseCodeEnum.SUCCESS_CODE.getCode(), ResponseCodeEnum.SUCCESS_CODE.getMessage(),"");
     }
 
     public static ResponseEntity initErrorResponseEntity(ResponseCodeEnum responseCodeEnum) {
-        return new ResponseEntity(responseCodeEnum.getCode(), responseCodeEnum.getMessage());
+        return new ResponseEntity(responseCodeEnum.getCode(), responseCodeEnum.getMessage(),"");
     }
 
     public Integer getCode() {
@@ -56,7 +56,7 @@ public class ResponseEntity {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 }
