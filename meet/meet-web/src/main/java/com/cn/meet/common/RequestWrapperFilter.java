@@ -37,10 +37,13 @@ public class RequestWrapperFilter implements Filter {
 
     //所有有效请求路径集合
     ImmutableList paths = ImmutableList.of("/user/verify", "/user/vCode", "/user/rUser",
-            "/user/info","/user/login","/user/logout","/user/nearby","/user/nearbysort");
+            "/user/info","/user/login","/user/logout","/user/nearby","/user/nearbysort","/file/download");
     //非token请求路径集合
     ImmutableList excludeTokenPaths = ImmutableList.of("/user/verify", "/user/vCode", "/user/rUser",
             "/user/login");
+    //文件上传和下载请求集合
+    ImmutableList filePaths = ImmutableList.of("/file/upload");
+
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -58,6 +61,10 @@ public class RequestWrapperFilter implements Filter {
             // 获取请求全IP地址
             String ip = IPUtils.getRealIp((HttpServletRequest)request, 1);
             log.info(" HttpServletRequest: IP:{}, MethodType:{}, ServletPath:{}", ip, methodType, servletPath);
+            if(filePaths.contains(servletPath)){
+                chain.doFilter(request, response);
+                return;
+            }
             requestWrapper = new BodyRequestWrapper((HttpServletRequest) request);
             if(requestWrapper == null) return;
             //仅支持POST请求格式

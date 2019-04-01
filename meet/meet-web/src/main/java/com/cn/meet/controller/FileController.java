@@ -4,16 +4,15 @@ import com.cn.meet.common.FilePathConfig;
 import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.handler.BodyRequestWrapper;
 import com.cn.meet.model.common.ResponseEntity;
+import com.cn.meet.req.oracle.FileReq;
 import com.cn.meet.util.FileUtils;
+import com.cn.meet.util.GeneralUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
@@ -28,15 +27,8 @@ import java.io.*;
 @Slf4j
 public class FileController {
 
-    private final ResourceLoader resourceLoader;
-
     @Autowired
     private FilePathConfig filePathConfig;
-
-    @Autowired
-    public FileController(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
-    }
 
     /**
      * @Description: 注册文件上传
@@ -47,7 +39,8 @@ public class FileController {
      */
     @PostMapping("/upload")
     @ResponseBody
-    public ResponseEntity upload(MultipartFile file, BodyRequestWrapper request) {
+    public ResponseEntity upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        log.info("文件{}上传.....", file.getOriginalFilename());
         boolean res = FileUtils.upload(file, filePathConfig.getRegister(), file.getOriginalFilename());
         if (res)
             return ResponseEntity.initResponse();
@@ -64,57 +57,48 @@ public class FileController {
      */
     @PostMapping("/download")
     @ResponseBody
-    public void download(String filePath, HttpServletResponse response) {
+    public void download(BodyRequestWrapper request, HttpServletResponse response) {
+        FileReq fileReq = (FileReq) GeneralUtils.mapperParams(request, FileReq.class);
+        String filePath = fileReq.getFilePath();
         try {
             log.info("文件下载... cur filePath is {}......", filePath);
-            // 由于是读取本机的文件，file是一定要加上的
-            resourceLoader.getResource("file:" + filePath);
+            File file = new File(filePath);
+            if (file.exists()) {
+                response.setContentType("application/force-download");// 设置强制下载不打开            
+                byte[] buffer = new byte[1024];
+                FileInputStream fis = null;
+                BufferedInputStream bis = null;
+                try {
+                    fis = new FileInputStream(file);
+                    bis = new BufferedInputStream(fis);
+                    OutputStream outputStream = response.getOutputStream();
+                    int i = bis.read(buffer);
+                    while (i != -1) {
+                        outputStream.write(buffer, 0, i);
+                        i = bis.read(buffer);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (bis != null) {
+                        try {
+                            bis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (fis != null) {
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
             log.error("文件下载失败......");
         }
-    }
-
-    @RequestMapping("/downloadFile")
-    private String downloadFile(HttpServletResponse response) {
-        String downloadFilePath = "/root/fileSavePath/";//被下载的文件在服务器中的路径,
-        String fileName = "demo.xml";//被下载文件的名称
-        File file = new File(downloadFilePath);
-        if (file.exists()) {
-            response.setContentType("application/force-download");// 设置强制下载不打开            
-            response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);
-            byte[] buffer = new byte[1024];
-            FileInputStream fis = null;
-            BufferedInputStream bis = null;
-            try {
-                fis = new FileInputStream(file);
-                bis = new BufferedInputStream(fis);
-                OutputStream outputStream = response.getOutputStream();
-                int i = bis.read(buffer);
-                while (i != -1) {
-                    outputStream.write(buffer, 0, i);
-                    i = bis.read(buffer);
-                }
-                return "下载成功";
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (bis != null) {
-                    try {
-                        bis.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (fis != null) {
-                    try {
-                        fis.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        return "下载失败";
     }
 }

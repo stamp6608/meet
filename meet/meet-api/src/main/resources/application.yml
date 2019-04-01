@@ -45,4 +45,4 @@ spring:
 
 file:
      path:
-        register: F:\file\register
+        register: F:/file/register
