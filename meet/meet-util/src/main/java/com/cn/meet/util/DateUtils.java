@@ -1,5 +1,6 @@
 package com.cn.meet.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -21,6 +22,11 @@ public class DateUtils {
         if(null == date) return 0;
         String timestamp = String.valueOf(date.getTime()/1000);
         return Integer.valueOf(timestamp);
+    }
+
+    public static String getNowDateStr(){
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        return  df.format(new Date().getTime());
     }
 
 }

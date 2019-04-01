@@ -35,3 +35,14 @@ spring:
             max-idle: 20 # 连接池中的最大空闲连接
             min-idle: 5 #连接池中的最小空闲连接
             max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+
+    servlet:
+        multipart:
+            enabled: true
+            max-file-size: 100MB
+            max-request-size: 100MB
+
+
+file:
+     path:
+        register: F:\file\register
