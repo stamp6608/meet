@@ -1,6 +1,5 @@
 package com.cn.meet.util;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -11,10 +10,7 @@ import java.io.IOException;
  * @Author: Stamp.M
  * @Date: 2019/4/1
  */
-@Slf4j
 public class FileUtils {
-
-    public static final String separator = File.separator;
 
     /**
      * @Description: 文件上传
