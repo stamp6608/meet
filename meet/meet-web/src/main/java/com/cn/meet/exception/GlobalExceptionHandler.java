@@ -48,6 +48,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = GeneralException.class)
     public String businessExceptionHandler(HttpServletRequest httpServletRequest, GeneralException e) {
         logger.info("业务处理异常...code : " + e.getCode() + "; msg:" + e.getMessage());
-        return GeneralUtils.encryptRes(new ResponseEntity(e.getCode(), e.getMessage()));
+        return GeneralUtils.encryptRes(new ResponseEntity(e.getCode(), e.getMessage(), ""));
     }
 }
