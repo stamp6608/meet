@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableCaching
 @SpringBootApplication
-@ComponentScan(basePackages = "com.cn.meet.controller.**")
+@ComponentScan(basePackages = "com.cn.meet.**")
 @ServletComponentScan
 public class WebApplication {
     public static void main(String[] args) {
