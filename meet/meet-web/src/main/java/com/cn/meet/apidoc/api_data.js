@@ -496,6 +496,72 @@ define({ "api": [
     "name": "PostHttpUrlUserVerify"
   },
   {
+    "type": "POST",
+    "url": "http://url/file/download",
+    "title": "2.2注册文件下载",
+    "version": "1.0.0",
+    "group": "2文件上传和下载",
+    "description": "<p>注册文件下载</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "filePath",
+            "description": "<p>文件路径（一般是图片路径,直接取imgPath的值即可）</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "***返回文件（图片）数据流***\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "./controller/FileController.java",
+    "groupTitle": "2文件上传和下载",
+    "name": "PostHttpUrlFileDownload"
+  },
+  {
+    "type": "POST",
+    "url": "http://url/file/upload",
+    "title": "2.1注册文件上传",
+    "version": "1.0.0",
+    "group": "2文件上传和下载",
+    "description": "<p>注册文件上传(建议先注册用户信息，再上传用户图片)</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "MultipartFile",
+            "optional": false,
+            "field": "file",
+            "description": "<p>上传文件; 注意：上传文件名为 &quot;手机号_文件名.文件后缀&quot;</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":{}\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "./controller/FileController.java",
+    "groupTitle": "2文件上传和下载",
+    "name": "PostHttpUrlFileUpload"
+  },
+  {
     "success": {
       "fields": {
         "Success 200": [

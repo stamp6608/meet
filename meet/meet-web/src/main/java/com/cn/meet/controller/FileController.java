@@ -69,11 +69,11 @@ public class FileController {
 
 
     /**
-     * @api {POST} http://url/file/upload  2.1注册文件下载
+     * @api {POST} http://url/file/download  2.2注册文件下载
      * @apiVersion 1.0.0
      * @apiGroup 2文件上传和下载
      * @apiDescription 注册文件下载
-     * @apiParam {String}   filePath  文件路径（一般是图片路径）
+     * @apiParam {String}   filePath  文件路径（一般是图片路径,直接取imgPath的值即可）
      * @apiSuccessExample {Object}   返回成功
      * ***返回文件（图片）数据流***
      * </b>
