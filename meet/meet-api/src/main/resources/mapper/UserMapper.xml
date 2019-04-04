@@ -55,7 +55,7 @@
     </update>
 
     <select id="getUserInfo" resultType="com.cn.meet.model.entity.UserInfoEntity">
-        select * from user where telephone=#{telephone} and aliasName=#{name}
+        select * from user where aliasName=#{name}
     </select>
 
     <select id="getUserToken" resultType="java.lang.String" parameterType="java.lang.String">
