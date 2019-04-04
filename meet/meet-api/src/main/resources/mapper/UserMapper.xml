@@ -89,4 +89,8 @@
         update user set token = '', online = '0' where telephone=#{telephone}
     </update>
 
+    <update id="updateUserFilePath" parameterType="java.lang.String">
+        update user set imgPath = #{filePath} where telephone=#{telephone}
+    </update>
+
 </mapper>

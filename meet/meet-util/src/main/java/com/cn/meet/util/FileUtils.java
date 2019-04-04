@@ -19,16 +19,14 @@ public class FileUtils {
      * @Author: Stamp.M
      * @Date: 2019/4/1
      */
-    public static boolean upload(MultipartFile file, String filePath, String fileName) {
+    public static boolean upload(MultipartFile file, String realPath) {
 
-        String realPath = filePath + "/" + DateUtils.getNowDateStr() + "/" + getFileName(fileName);
         File dest = new File(realPath);
         if (!dest.getParentFile().exists()) {
             dest.getParentFile().mkdir();
         }
         try {
             file.transferTo(dest);
-            //todo 待更新注册用户中imgPath
             return true;
         } catch (IllegalStateException e) {
             e.printStackTrace();

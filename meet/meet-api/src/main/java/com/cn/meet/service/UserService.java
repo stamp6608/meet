@@ -1,6 +1,5 @@
 package com.cn.meet.service;
 
-import com.cn.meet.enums.ResponseCodeEnum;
 import com.cn.meet.exception.GeneralException;
 import com.cn.meet.mapper.UserMapper;
 import com.cn.meet.model.entity.UserInfoEntity;
@@ -44,8 +43,7 @@ public class UserService {
     */
     @Transactional
     public void savePhoneVerify(PhoneInfoReq phoneInfoReq) throws GeneralException{
-        Integer res = userMapper.savePhoneVerify(phoneInfoReq);
-        if(res != 1) throw GeneralException.initEnumGeneralException(ResponseCodeEnum.INNER_ERROR);
+         userMapper.savePhoneVerify(phoneInfoReq);
     }
 
     /** 
@@ -68,8 +66,7 @@ public class UserService {
     */
     @Transactional
     public void saveUserInfo(UserInfoReq userInfoReq) throws GeneralException{
-        Integer res = userMapper.saveUserInfo(userInfoReq);
-        if(res != 1) throw GeneralException.initEnumGeneralException(ResponseCodeEnum.INNER_ERROR);
+        userMapper.saveUserInfo(userInfoReq);
     }
 
     /** 
@@ -115,8 +112,7 @@ public class UserService {
      */
     @Transactional
     public void updateUserLocation(UserInfo3Req userInfoReq) throws GeneralException{
-        Integer res = userMapper.updateUserLocation(userInfoReq);
-        if(res != 1) throw GeneralException.initEnumGeneralException(ResponseCodeEnum.INNER_ERROR);
+        userMapper.updateUserLocation(userInfoReq);
     }
 
     /** 
@@ -128,8 +124,7 @@ public class UserService {
     */ 
     @Transactional
     public void logout(BaseReq userInfoReq) throws GeneralException{
-        Integer res = userMapper.logout(userInfoReq);
-        if(res != 1) throw GeneralException.initEnumGeneralException(ResponseCodeEnum.INNER_ERROR);
+        userMapper.logout(userInfoReq);
     }
 
 
@@ -155,4 +150,16 @@ public class UserService {
         return userMapper.getvicinitysort(vici);
     }
 
+
+    /** 
+    * @Description: 更新会员图片 
+    * @Param: [telephone, filePath] 
+    * @return: void 
+    * @Author: Stamp.M 
+    * @Date: 2019/4/4 
+    */ 
+    @Transactional
+    public void updateUserFilePath(String telephone, String filePath){
+        userMapper.updateUserFilePath(telephone,filePath);
+    }
 }
