@@ -3,6 +3,7 @@
 <mapper namespace="com.cn.meet.mapper.UserMapper">
 
     <resultMap id="users" type="com.cn.meet.model.entity.UserInfoEntity">
+        <result column="id" property="id"/>
         <result column="telephone" property="telephone"/>
         <result column="language" property="language"/>
         <result column="country" property="country"/>

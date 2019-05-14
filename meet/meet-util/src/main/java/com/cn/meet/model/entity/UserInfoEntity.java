@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 public class UserInfoEntity implements Serializable{
 
     private static final long serialVersionUID = -4884300323260301077L;
+    private Integer id;
     //手机号，唯一标识
     private String telephone;
     //语言
@@ -66,6 +67,14 @@ public class UserInfoEntity implements Serializable{
     private String imgPath;
     //距离
     private String distance;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getDistance() {
         return distance;
