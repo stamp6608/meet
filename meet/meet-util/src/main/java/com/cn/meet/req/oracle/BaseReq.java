@@ -1,12 +1,17 @@
 package com.cn.meet.req.oracle;
 
+import java.io.Serializable;
+
 /**
  * @program: meet
  * @description: 请求基础类
  * @author: Stamp.M
  * @create: 2019-03-28 18:42
  **/
-public class BaseReq {
+public class BaseReq implements Serializable {
+
+    private static final long serialVersionUID = 4083102438225417126L;
+
     //手机号
     private String telephone;
     //登陆成功的令牌

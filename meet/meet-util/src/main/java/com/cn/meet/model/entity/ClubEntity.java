@@ -11,8 +11,10 @@ import java.math.BigDecimal;
  **/
 public class ClubEntity implements Serializable{
     private static final long serialVersionUID = 8281264404154203448L;
-    //俱乐部id
+
     private Integer id;
+    //俱乐部id
+    private String clubId;
     //俱乐部名称
     private String clubName;
     //国家
@@ -27,6 +29,10 @@ public class ClubEntity implements Serializable{
     private String desc;
     //俱乐部地址
     private String location;
+    //俱乐部经度
+    private BigDecimal longitude;
+    //俱乐部维度
+    private BigDecimal latitude;
     //总消费
     private BigDecimal consume;
     //在线时间
@@ -42,6 +48,30 @@ public class ClubEntity implements Serializable{
     //状态 0有效 1关闭 2删除
     private Integer status;
 
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getClubId() {
+        return clubId;
+    }
+
+    public void setClubId(String clubId) {
+        this.clubId = clubId;
+    }
 
     public Integer getStatus() {
         return status;

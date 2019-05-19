@@ -1,6 +1,4 @@
-package com.cn.meet.model.entity;
-
-import java.io.Serializable;
+package com.cn.meet.req.oracle;
 
 /**
  * @program: meet
@@ -8,11 +6,8 @@ import java.io.Serializable;
  * @author: Stamp.M
  * @create: 2019-04-12 20:10
  **/
-public class ClubMemberEntity implements Serializable{
+public class ClubMemberReq extends BaseReq{
 
-    private static final long serialVersionUID = 8028434257303276845L;
-
-    private Integer id;
     //用户id
     private Integer userId;
     //用户名
@@ -22,13 +17,12 @@ public class ClubMemberEntity implements Serializable{
     //成员类型 0 管理员; 1 VIP; 2 红牌; 3 处; 4 小妹; 5 包养中; 6 普通
     private Integer type;
 
-
-    public Integer getId() {
-        return id;
+    public Integer getType() {
+        return type;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Integer getUserId() {
@@ -55,11 +49,4 @@ public class ClubMemberEntity implements Serializable{
         this.clubId = clubId;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
 }

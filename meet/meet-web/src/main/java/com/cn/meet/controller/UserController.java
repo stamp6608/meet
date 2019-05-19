@@ -39,10 +39,6 @@ import java.util.List;
 @Slf4j
 public class UserController {
 
-    // 仅支持String类型的缓存
-//    @Autowired
-//    private StringRedisTemplate redisTemplate;
-
     // 支持多类型的数据缓存
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;

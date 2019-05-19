@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.meet.mapper.ClubMapper">
+
+    <resultMap id="users" type="com.cn.meet.model.entity.UserInfoEntity">
+        <result column="userId" property="userId"/>
+        <result column="userName" property="userName"/>
+        <result column="clubId" property="clubId"/>
+        <result column="type" property="type"/>
+        <result column="telephone" property="telephone"/>
+        <result column="language" property="language"/>
+        <result column="country" property="country"/>
+        <result column="aliasName" property="aliasName"/>
+        <result column="birthday" property="birthday"/>
+        <result column="weight" property="weight"/>
+        <result column="sex" property="sex"/>
+        <result column="city" property="city"/>
+        <result column="shape" property="shape"/>
+        <result column="race" property="race"/>
+        <result column="emotion" property="emotion"/>
+        <result column="selfIntroduction" property="selfIntroduction"/>
+        <result column="expectType" property="expectType"/>
+        <result column="expectSex" property="expectSex"/>
+        <result column="expectShape" property="expectShape"/>
+        <result column="expectRace" property="expectRace"/>
+        <result column="expectAge" property="expectAge"/>
+        <result column="hobby" property="hobby"/>
+        <result column="religion" property="religion"/>
+        <result column="edutication" property="edutication"/>
+        <result column="smoke" property="smoke"/>
+        <result column="hasBaby" property="hasBaby"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="imgPath" property="imgPath"/>
+        <result column="levNum" property="levNum"/>
+        <result column="online" property="online"/>
+        <result column="status" property="status"/>
+
+    </resultMap>
+
+    <select id="fetchClubList" resultType="com.cn.meet.model.entity.ClubEntity"
+            parameterType="com.cn.meet.model.entity.BaseEntity">
+       select * from club ORDER BY levNum desc id asc LIMIT #{max}, #{size}
+    </select>
+
+    <select id="fetchClubInfos" resultType="com.cn.meet.model.entity.ClubEntity"
+            parameterType="com.cn.meet.req.oracle.ClubInfoReq">
+        select * from club
+        <where>
+            <if test="clubId != null and clubId != ''">
+                and clubId = #{clubId}
+            </if>
+            <if test="clubName != null and clubName != ''">
+                and clubName LIKE CONCAT('%', #{clubName}, '%')
+            </if>
+        </where>
+        ORDER BY levNum desc id asc LIMIT 0, 10
+    </select>
+
+    <select id="fetchClubMemberInfos" resultType="users"
+            parameterType="com.cn.meet.req.oracle.ClubInfoReq">
+        select a.userId, a.userName, a.clubId, a.clubName, b.*
+        from club_member_map a
+        left join
+        user b
+        on a.userId = b.id
+        where a.clubId = #{clubId}
+        ORDER BY b.levNum desc id asc
+    </select>
+
+    <insert id="addClub" parameterType="com.cn.meet.req.oracle.ClubInfoReq" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into club(clubId, clubName, country, level, credit, location, longitude, latitude, addTime)
+        values(#{clubId},#{clubName},#{country},#{level},#{charge},#{location},#{longitude},#{latitude},#{addTime})
+    </insert>
+
+    <insert id="addClubMember" parameterType="com.cn.meet.req.oracle.ClubMemberReq" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into club_member_map(userId, userName, clubId, type)
+        values(#{userId},#{userName},#{clubId},#{type})
+    </insert>
+
+    <update id="setClubMember" parameterType="com.cn.meet.req.oracle.ClubMemberReq">
+        update club_member_map set type = #{type} where userId=#{userId} and clubId=#{clubId}
+    </update>
+
+    <delete id="removeClubMember" parameterType="com.cn.meet.req.oracle.ClubMemberReq">
+        DELETE from club_member_map WHERE userId=#{userId} and clubId=#{clubId}
+    </delete>
+
+</mapper>

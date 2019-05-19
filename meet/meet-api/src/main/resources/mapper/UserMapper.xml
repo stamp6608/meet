@@ -29,6 +29,9 @@
         <result column="longitude" property="longitude"/>
         <result column="latitude" property="latitude"/>
         <result column="imgPath" property="imgPath"/>
+        <result column="levNum" property="levNum"/>
+        <result column="online" property="online"/>
+        <result column="status" property="status"/>
 
     </resultMap>
 

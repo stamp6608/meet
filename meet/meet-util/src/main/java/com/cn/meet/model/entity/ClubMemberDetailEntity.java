@@ -5,22 +5,29 @@ import java.math.BigDecimal;
 
 /**
  * @program: meet
- * @description: 用户信息类
+ * @description: 俱乐部成员详情
  * @author: Stamp.M
- * @create: 2019-03-16 20:21
+ * @create: 2019-04-12 20:10
  **/
-public class UserInfoEntity implements Serializable{
+public class ClubMemberDetailEntity implements Serializable{
 
-    private static final long serialVersionUID = -4884300323260301077L;
-    private Integer id;
+    private static final long serialVersionUID = 8028434257303276845L;
+
+    //用户id
+    private Integer userId;
+    //用户名
+    private String userName;
+    //俱乐部ID
+    private String clubId;
+    //成员类型 0 管理员; 1 VIP; 2 红牌; 3 处; 4 小妹; 5 包养中; 6 普通
+    private Integer type;
+
     //手机号，唯一标识
     private String telephone;
     //语言
     private String language;
     //国家
     private String country;
-    //别名
-    private String aliasName;
     //生日
     private String birthday;
     //身高/体重
@@ -75,94 +82,6 @@ public class UserInfoEntity implements Serializable{
     private Integer status;
 
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getOnline() {
-        return online;
-    }
-
-    public void setOnline(String online) {
-        this.online = online;
-    }
-
-    public Integer getLevNum() {
-        return levNum;
-    }
-
-    public void setLevNum(Integer levNum) {
-        this.levNum = levNum;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDistance() {
-        return distance;
-    }
-
-    public void setDistance(String distance) {
-        this.distance = distance;
-    }
-
-    public String getImgPath() {
-        return imgPath;
-    }
-
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
-    }
-
-    public BigDecimal getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
-    }
-
-    public BigDecimal getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getExpectShape() {
-        return expectShape;
-    }
-
-    public void setExpectShape(String expectShape) {
-        this.expectShape = expectShape;
-    }
-
     public String getTelephone() {
         return telephone;
     }
@@ -185,14 +104,6 @@ public class UserInfoEntity implements Serializable{
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getAliasName() {
-        return aliasName;
-    }
-
-    public void setAliasName(String aliasName) {
-        this.aliasName = aliasName;
     }
 
     public String getBirthday() {
@@ -267,6 +178,14 @@ public class UserInfoEntity implements Serializable{
         this.expectSex = expectSex;
     }
 
+    public String getExpectShape() {
+        return expectShape;
+    }
+
+    public void setExpectShape(String expectShape) {
+        this.expectShape = expectShape;
+    }
+
     public String getExpectRace() {
         return expectRace;
     }
@@ -281,6 +200,14 @@ public class UserInfoEntity implements Serializable{
 
     public void setExpectAge(String expectAge) {
         this.expectAge = expectAge;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getHobby() {
@@ -321,5 +248,101 @@ public class UserInfoEntity implements Serializable{
 
     public void setHasBaby(String hasBaby) {
         this.hasBaby = hasBaby;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public Integer getLevNum() {
+        return levNum;
+    }
+
+    public void setLevNum(Integer levNum) {
+        this.levNum = levNum;
+    }
+
+    public String getOnline() {
+        return online;
+    }
+
+    public void setOnline(String online) {
+        this.online = online;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getClubId() {
+        return clubId;
+    }
+
+    public void setClubId(String clubId) {
+        this.clubId = clubId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

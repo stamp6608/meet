@@ -1,8 +1,6 @@
 package com.cn.meet.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.cn.meet.util.HttpHelper;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
@@ -68,11 +66,7 @@ public class BodyRequestWrapper extends HttpServletRequestWrapper {
 
 
     public String getJson() {
-        String res = "";
-        if (StringUtils.isNotBlank(json)) {
-            res = JSON.parseObject(json).getString("param");
-        }
-        return res;
+        return json;
     }
 
     public String getDecryptJson() {
