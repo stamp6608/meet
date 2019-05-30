@@ -57,7 +57,7 @@
         ORDER BY levNum desc id asc LIMIT 0, 10
     </select>
 
-    <select id="fetchClubMemberInfos" resultType="users"
+    <select id="fetchClubMemberInfos" resultMap="users"
             parameterType="com.cn.meet.req.oracle.ClubInfoReq">
         select a.userId, a.userName, a.clubId, a.clubName, b.*
         from club_member_map a
