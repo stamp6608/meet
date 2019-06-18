@@ -3,7 +3,7 @@ spring:
         active: pro
 
 server:
-    port: 8888
+    port: 18918
     servlet:
         session:
           timeout: 43200s  # session 超时时间12小时

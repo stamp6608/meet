@@ -37,7 +37,9 @@ public class RequestWrapperFilter implements Filter {
 
     //所有有效请求路径集合
     ImmutableList paths = ImmutableList.of("/user/verify", "/user/vCode", "/user/rUser",
-            "/user/info","/user/login","/user/logout","/user/nearby","/user/nearbysort","/file/download");
+            "/user/info","/user/login","/user/logout","/user/nearby","/user/nearbysort","/file/download",
+            "/club/clubList","/club/fetchClubs","/club/addClub","/club/clubMembers","/club/addMember",
+            "/club/setMember","/club/outMember");
     //非token请求路径集合
     ImmutableList excludeTokenPaths = ImmutableList.of("/user/verify", "/user/vCode", "/user/rUser",
             "/user/login");
