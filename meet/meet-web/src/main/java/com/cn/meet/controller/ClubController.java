@@ -52,7 +52,29 @@ public class ClubController {
      * {
      * "code":0,
      * "message:"success",
-     * "data":[]
+     * "data":[
+     * {
+     * "id" : 1,
+     * "clubId" : "207fbfc2b857470cb0d454efe37f19cd",   //俱乐部ID
+     * "clubName" : "test00",       // 俱乐部名称
+     * "country" : "China",         // 国家
+     * "level" : "lev2",            // 信用等级
+     * "levNum" : 0,                // 信用度
+     * "credit" : 1000.00,          // 入会费用
+     * "desc" : null,               // 俱乐部描述
+     * "location" : "北京朝阳区",    // 俱乐部地址
+     * "longitude" : 116.314168000000000,  // 俱乐部经度
+     * "latitude" : 40.033075000000000,   // 俱乐部维度
+     * "consume" : 0.00,    // 总消费
+     * "onlineTime" : 0,    // 在线时间
+     * "imgUrl" : null,     // 俱乐部图片地址
+     * "payFee" : 0.00,     // 入会费
+     * "spread" : null,     // 俱乐部推广
+     * "matchCharge" : 0.00,  // 俱乐部竞价
+     * "status" : 0     // /状态 0有效 1关闭 2删除
+     * },
+     * ......
+     * ]
      * }
      * </b>
      * 加密此json对象后返回
@@ -84,7 +106,29 @@ public class ClubController {
      * {
      * "code":0,
      * "message:"success",
-     * "data":[]
+     * "data":[
+     * {
+     * "id" : 1,
+     * "clubId" : "207fbfc2b857470cb0d454efe37f19cd",   //俱乐部ID
+     * "clubName" : "test00",       // 俱乐部名称
+     * "country" : "China",         // 国家
+     * "level" : "lev2",            // 信用等级
+     * "levNum" : 0,                // 信用度
+     * "credit" : 1000.00,          // 入会费用
+     * "desc" : null,               // 俱乐部描述
+     * "location" : "北京朝阳区",    // 俱乐部地址
+     * "longitude" : 116.314168000000000,  // 俱乐部经度
+     * "latitude" : 40.033075000000000,   // 俱乐部维度
+     * "consume" : 0.00,    // 总消费
+     * "onlineTime" : 0,    // 在线时间
+     * "imgUrl" : null,     // 俱乐部图片地址
+     * "payFee" : 0.00,     // 入会费
+     * "spread" : null,     // 俱乐部推广
+     * "matchCharge" : 0.00,  // 俱乐部竞价
+     * "status" : 0     // /状态 0有效 1关闭 2删除
+     * },
+     * ......
+     * ]
      * }
      * </b>
      * 加密此json对象后返回
@@ -146,7 +190,12 @@ public class ClubController {
      * {
      * "code":0,
      * "message:"success",
-     * "data":[]
+     * "data":[
+     * {
+     * 会员信息，见 1模块说明
+     * }，
+     * ......
+     * ]
      * }
      * </b>
      * 加密此json对象后返回
@@ -170,7 +219,6 @@ public class ClubController {
      * @apiParam {Integer} userId    用户ID
      * @apiParam {String} userName 	 用户名
      * @apiParam {Integer} type     成员类型 0 管理员; 1 VIP; 2 红牌; 3 处; 4 小妹; 5 包养中; 6 普通
-     *
      * @apiSuccessExample {Object} 返回成功
      * {
      * "code":0,
@@ -199,7 +247,6 @@ public class ClubController {
      * @apiParam {String} clubId     俱乐部ID
      * @apiParam {Integer} userId    用户ID
      * @apiParam {Integer} type     成员类型 0 管理员; 1 VIP; 2 红牌; 3 处; 4 小妹; 5 包养中; 6 普通
-     *
      * @apiSuccessExample {Object} 返回成功
      * {
      * "code":0,
@@ -226,7 +273,6 @@ public class ClubController {
      * @apiDescription 踢出俱乐部成员
      * @apiParam {String} clubId     俱乐部ID
      * @apiParam {Integer} userId    用户ID
-     *
      * @apiSuccessExample {Object} 返回成功
      * {
      * "code":0,

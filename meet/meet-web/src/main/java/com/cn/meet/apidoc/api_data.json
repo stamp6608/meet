@@ -4,7 +4,7 @@
     "url": "http://url/user/info",
     "title": "1.4查询用户个人信息",
     "version": "1.0.0",
-    "group": "1用户管理",
+    "group": "1____",
     "description": "<p>查询用户个人信息, 数字解析同1.3的参数定义，多选用&quot;,&quot;分割</p>",
     "parameter": {
       "fields": {
@@ -28,8 +28,8 @@
         }
       ]
     },
-    "filename": "./controller/UserController.java",
-    "groupTitle": "1用户管理",
+    "filename": "controller/UserController.java",
+    "groupTitle": "1____",
     "name": "PostHttpUrlUserInfo"
   },
   {
@@ -37,7 +37,7 @@
     "url": "http://url/user/login",
     "title": "1.5用户登陆",
     "version": "1.0.0",
-    "group": "1用户管理",
+    "group": "1____",
     "description": "<p>用户登陆</p>",
     "parameter": {
       "fields": {
@@ -75,8 +75,8 @@
         }
       ]
     },
-    "filename": "./controller/UserController.java",
-    "groupTitle": "1用户管理",
+    "filename": "controller/UserController.java",
+    "groupTitle": "1____",
     "name": "PostHttpUrlUserLogin"
   },
   {
@@ -84,7 +84,7 @@
     "url": "http://url/user/logout",
     "title": "1.6用户登出(用户注销)",
     "version": "1.0.0",
-    "group": "1用户管理",
+    "group": "1____",
     "description": "<p>用户登出(用户注销)</p>",
     "success": {
       "examples": [
@@ -95,8 +95,8 @@
         }
       ]
     },
-    "filename": "./controller/UserController.java",
-    "groupTitle": "1用户管理",
+    "filename": "controller/UserController.java",
+    "groupTitle": "1____",
     "name": "PostHttpUrlUserLogout"
   },
   {
@@ -104,7 +104,7 @@
     "url": "http://url/user/nearby",
     "title": "1.7搜索附近的人(指定半径内的在线用户)",
     "version": "1.0.0",
-    "group": "1用户管理",
+    "group": "1____",
     "description": "<p>分页查询, 搜索附近的人(指定半径内的在线用户)</p>",
     "parameter": {
       "fields": {
@@ -156,8 +156,8 @@
         }
       ]
     },
-    "filename": "./controller/UserController.java",
-    "groupTitle": "1用户管理",
+    "filename": "controller/UserController.java",
+    "groupTitle": "1____",
     "name": "PostHttpUrlUserNearby"
   },
   {
@@ -165,7 +165,7 @@
     "url": "http://url/user/nearbysort",
     "title": "1.8搜索附近的人排序(由近及远查询)",
     "version": "1.0.0",
-    "group": "1用户管理",
+    "group": "1____",
     "description": "<p>分页查询, 搜索附近的人排序(由近及远查询)</p>",
     "parameter": {
       "fields": {
@@ -210,8 +210,8 @@
         }
       ]
     },
-    "filename": "./controller/UserController.java",
-    "groupTitle": "1用户管理",
+    "filename": "controller/UserController.java",
+    "groupTitle": "1____",
     "name": "PostHttpUrlUserNearbysort"
   },
   {
@@ -219,7 +219,7 @@
     "url": "http://url/user/rUser",
     "title": "1.3用户信息注册",
     "version": "1.0.0",
-    "group": "1用户管理",
+    "group": "1____",
     "description": "<p>用户信息注册，请在http的header中设置ip。 </b> 各选项用对应数字表示，多选请用&quot;,&quot;分割</p>",
     "parameter": {
       "fields": {
@@ -390,8 +390,8 @@
         }
       ]
     },
-    "filename": "./controller/UserController.java",
-    "groupTitle": "1用户管理",
+    "filename": "controller/UserController.java",
+    "groupTitle": "1____",
     "name": "PostHttpUrlUserRuser"
   },
   {
@@ -399,7 +399,7 @@
     "url": "http://url/user/vCode",
     "title": "1.2手机短信验证码验证",
     "version": "1.0.0",
-    "group": "1用户管理",
+    "group": "1____",
     "description": "<p>手机短信验证码验证</p>",
     "parameter": {
       "fields": {
@@ -444,8 +444,8 @@
         }
       ]
     },
-    "filename": "./controller/UserController.java",
-    "groupTitle": "1用户管理",
+    "filename": "controller/UserController.java",
+    "groupTitle": "1____",
     "name": "PostHttpUrlUserVcode"
   },
   {
@@ -453,7 +453,7 @@
     "url": "http://url/user/verify",
     "title": "1.1获取手机短信验证 (需接入第三方手机短信验证平台)",
     "version": "1.0.0",
-    "group": "1用户管理",
+    "group": "1____",
     "description": "<p>获取手机短信验证 (需接入第三方手机短信验证平台)</p>",
     "parameter": {
       "fields": {
@@ -491,8 +491,8 @@
         }
       ]
     },
-    "filename": "./controller/UserController.java",
-    "groupTitle": "1用户管理",
+    "filename": "controller/UserController.java",
+    "groupTitle": "1____",
     "name": "PostHttpUrlUserVerify"
   },
   {
@@ -500,7 +500,7 @@
     "url": "http://url/file/download",
     "title": "2.2注册文件下载",
     "version": "1.0.0",
-    "group": "2文件上传和下载",
+    "group": "2_______",
     "description": "<p>注册文件下载</p>",
     "parameter": {
       "fields": {
@@ -524,8 +524,8 @@
         }
       ]
     },
-    "filename": "./controller/FileController.java",
-    "groupTitle": "2文件上传和下载",
+    "filename": "controller/FileController.java",
+    "groupTitle": "2_______",
     "name": "PostHttpUrlFileDownload"
   },
   {
@@ -533,7 +533,7 @@
     "url": "http://url/file/upload",
     "title": "2.1注册文件上传",
     "version": "1.0.0",
-    "group": "2文件上传和下载",
+    "group": "2_______",
     "description": "<p>注册文件上传(建议先注册用户信息，再上传用户图片)</p>",
     "parameter": {
       "fields": {
@@ -557,36 +557,351 @@
         }
       ]
     },
-    "filename": "./controller/FileController.java",
-    "groupTitle": "2文件上传和下载",
+    "filename": "controller/FileController.java",
+    "groupTitle": "2_______",
     "name": "PostHttpUrlFileUpload"
   },
   {
-    "success": {
+    "type": "POST",
+    "url": "http://url/club/addClub",
+    "title": "3.3新增俱乐部",
+    "version": "1.0.0",
+    "group": "3___",
+    "description": "<p>新增俱乐部 </b></p>",
+    "parameter": {
       "fields": {
-        "Success 200": [
+        "Parameter": [
           {
-            "group": "Success 200",
+            "group": "Parameter",
+            "type": "Integer",
             "optional": false,
-            "field": "varname1",
-            "description": "<p>No type.</p>"
+            "field": "userId",
+            "description": "<p>用户ID</p>"
           },
           {
-            "group": "Success 200",
+            "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "varname2",
-            "description": "<p>With type.</p>"
+            "field": "userName",
+            "description": "<p>创建人用户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "clubId",
+            "description": "<p>俱乐部id 如(nfjfm88jj)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "clubName",
+            "description": "<p>俱乐部名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "BigDecimal",
+            "optional": false,
+            "field": "longitude",
+            "description": "<p>经度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "BigDecimal",
+            "optional": false,
+            "field": "latitude",
+            "description": "<p>维度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "location",
+            "description": "<p>俱乐部地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "level",
+            "description": "<p>俱乐部级别 (如&quot;lev1&quot;或 “lev2&quot;等)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "country",
+            "description": "<p>国家</p>"
           }
         ]
       }
     },
-    "type": "",
-    "url": "",
-    "version": "0.0.0",
-    "filename": "./apidoc/main.js",
-    "group": "F:\\66666\\meet\\meet\\meet-web\\src\\main\\java\\com\\cn\\meet\\apidoc\\main.js",
-    "groupTitle": "F:\\66666\\meet\\meet\\meet-web\\src\\main\\java\\com\\cn\\meet\\apidoc\\main.js",
-    "name": ""
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":\"\"\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "controller/ClubController.java",
+    "groupTitle": "3___",
+    "name": "PostHttpUrlClubAddclub"
+  },
+  {
+    "type": "POST",
+    "url": "http://url/club/addMember",
+    "title": "3.5 加入俱乐部成员",
+    "version": "1.0.0",
+    "group": "3___",
+    "description": "<p>加入俱乐部成员</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "clubId",
+            "description": "<p>俱乐部ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>用户ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "userName",
+            "description": "<p>用户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "type",
+            "description": "<p>成员类型 0 管理员; 1 VIP; 2 红牌; 3 处; 4 小妹; 5 包养中; 6 普通</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":[]\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "controller/ClubController.java",
+    "groupTitle": "3___",
+    "name": "PostHttpUrlClubAddmember"
+  },
+  {
+    "type": "POST",
+    "url": "http://url/club/clubList",
+    "title": "3.1俱乐部信息分页查询",
+    "version": "1.0.0",
+    "group": "3___",
+    "description": "<p>俱乐部信息分页查询（根据俱乐部信用度排序）</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "page",
+            "description": "<p>页码</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "pageSize",
+            "description": "<p>页数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":[\n{\n\"id\" : 1,\n\"clubId\" : \"207fbfc2b857470cb0d454efe37f19cd\",   //俱乐部ID\n\"clubName\" : \"test00\",       // 俱乐部名称\n\"country\" : \"China\",         // 国家\n\"level\" : \"lev2\",            // 信用等级\n\"levNum\" : 0,                // 信用度\n\"credit\" : 1000.00,          // 入会费用\n\"desc\" : null,               // 俱乐部描述\n\"location\" : \"北京朝阳区\",    // 俱乐部地址\n\"longitude\" : 116.314168000000000,  // 俱乐部经度\n\"latitude\" : 40.033075000000000,   // 俱乐部维度\n\"consume\" : 0.00,    // 总消费\n\"onlineTime\" : 0,    // 在线时间\n\"imgUrl\" : null,     // 俱乐部图片地址\n\"payFee\" : 0.00,     // 入会费\n\"spread\" : null,     // 俱乐部推广\n\"matchCharge\" : 0.00,  // 俱乐部竞价\n\"status\" : 0     // /状态 0有效 1关闭 2删除\n},\n......\n]\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "controller/ClubController.java",
+    "groupTitle": "3___",
+    "name": "PostHttpUrlClubClublist"
+  },
+  {
+    "type": "POST",
+    "url": "http://url/club/clubMembers",
+    "title": "3.4俱乐部成员查询",
+    "version": "1.0.0",
+    "group": "3___",
+    "description": "<p>俱乐部成员查询</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "clubId",
+            "description": "<p>俱乐部ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":[\n{\n会员信息，见 1模块说明\n}，\n......\n]\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "controller/ClubController.java",
+    "groupTitle": "3___",
+    "name": "PostHttpUrlClubClubmembers"
+  },
+  {
+    "type": "POST",
+    "url": "http://url/club/fetchClubs",
+    "title": "3.2根据俱乐部ID或者俱乐部名称查询俱乐部信息",
+    "version": "1.0.0",
+    "group": "3___",
+    "description": "<p>根据俱乐部ID或者俱乐部名称查询俱乐部信息 (最多返回10条记录)</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "clubId",
+            "description": "<p>俱乐部ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "clubName",
+            "description": "<p>俱乐部名称</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":[\n{\n\"id\" : 1,\n\"clubId\" : \"207fbfc2b857470cb0d454efe37f19cd\",   //俱乐部ID\n\"clubName\" : \"test00\",       // 俱乐部名称\n\"country\" : \"China\",         // 国家\n\"level\" : \"lev2\",            // 信用等级\n\"levNum\" : 0,                // 信用度\n\"credit\" : 1000.00,          // 入会费用\n\"desc\" : null,               // 俱乐部描述\n\"location\" : \"北京朝阳区\",    // 俱乐部地址\n\"longitude\" : 116.314168000000000,  // 俱乐部经度\n\"latitude\" : 40.033075000000000,   // 俱乐部维度\n\"consume\" : 0.00,    // 总消费\n\"onlineTime\" : 0,    // 在线时间\n\"imgUrl\" : null,     // 俱乐部图片地址\n\"payFee\" : 0.00,     // 入会费\n\"spread\" : null,     // 俱乐部推广\n\"matchCharge\" : 0.00,  // 俱乐部竞价\n\"status\" : 0     // /状态 0有效 1关闭 2删除\n},\n......\n]\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "controller/ClubController.java",
+    "groupTitle": "3___",
+    "name": "PostHttpUrlClubFetchclubs"
+  },
+  {
+    "type": "POST",
+    "url": "http://url/club/outMember",
+    "title": "3.7 踢出俱乐部成员",
+    "version": "1.0.0",
+    "group": "3___",
+    "description": "<p>踢出俱乐部成员</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "clubId",
+            "description": "<p>俱乐部ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>用户ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":[]\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "controller/ClubController.java",
+    "groupTitle": "3___",
+    "name": "PostHttpUrlClubOutmember"
+  },
+  {
+    "type": "POST",
+    "url": "http://url/club/setMember",
+    "title": "3.6 俱乐部成员类型设置",
+    "version": "1.0.0",
+    "group": "3___",
+    "description": "<p>俱乐部成员类型设置</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "clubId",
+            "description": "<p>俱乐部ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "userId",
+            "description": "<p>用户ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "type",
+            "description": "<p>成员类型 0 管理员; 1 VIP; 2 红牌; 3 处; 4 小妹; 5 包养中; 6 普通</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "返回成功",
+          "content": "{\n\"code\":0,\n\"message:\"success\",\n\"data\":[]\n}\n</b>\n加密此json对象后返回",
+          "type": "Object"
+        }
+      ]
+    },
+    "filename": "controller/ClubController.java",
+    "groupTitle": "3___",
+    "name": "PostHttpUrlClubSetmember"
   }
 ]
