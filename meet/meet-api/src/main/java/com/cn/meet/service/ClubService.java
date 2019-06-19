@@ -7,14 +7,12 @@ import com.cn.meet.model.entity.ClubEntity;
 import com.cn.meet.model.entity.ClubMemberDetailEntity;
 import com.cn.meet.req.oracle.ClubInfoReq;
 import com.cn.meet.req.oracle.ClubMemberReq;
-import com.cn.meet.util.DateUtils;
 import com.cn.meet.util.GeneralUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,7 +43,6 @@ public class ClubService {
     public void addClub(ClubInfoReq clubInfoReq){
         String clubId = GeneralUtils.buildToken();
         clubInfoReq.setClubId(clubId);
-        clubInfoReq.setAddTime(DateUtils.getSecondTimestamp(new Date()));
         clubInfoReq.setCharge(new BigDecimal(ClubCharge.getIndex(clubInfoReq.getLevel())));
         clubMapper.addClub(clubInfoReq);
         //新增俱乐部管理员

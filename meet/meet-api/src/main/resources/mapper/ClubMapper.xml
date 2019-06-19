@@ -40,7 +40,7 @@
 
     <select id="fetchClubList" resultType="com.cn.meet.model.entity.ClubEntity"
             parameterType="com.cn.meet.model.entity.BaseEntity">
-       select * from club ORDER BY levNum desc id asc LIMIT #{max}, #{size}
+       select * from club ORDER BY levNum desc,id asc LIMIT #{max}, #{size}
     </select>
 
     <select id="fetchClubInfos" resultType="com.cn.meet.model.entity.ClubEntity"
@@ -54,24 +54,24 @@
                 and clubName LIKE CONCAT('%', #{clubName}, '%')
             </if>
         </where>
-        ORDER BY levNum desc id asc LIMIT 0, 10
+        ORDER BY levNum desc,id asc LIMIT 0, 10
     </select>
 
     <select id="fetchClubMemberInfos" resultMap="users"
             parameterType="com.cn.meet.req.oracle.ClubInfoReq">
-        select a.userId, a.userName, a.clubId, a.clubName, b.*
+        select a.userId, a.userName, a.clubId, b.*
         from club_member_map a
         left join
         user b
         on a.userId = b.id
         where a.clubId = #{clubId}
-        ORDER BY b.levNum desc id asc
+        ORDER BY b.levNum desc,id asc
     </select>
 
     <insert id="addClub" parameterType="com.cn.meet.req.oracle.ClubInfoReq" useGeneratedKeys="true"
             keyProperty="id">
-        insert into club(clubId, clubName, country, level, credit, location, longitude, latitude, addTime)
-        values(#{clubId},#{clubName},#{country},#{level},#{charge},#{location},#{longitude},#{latitude},#{addTime})
+        insert into club(clubId, clubName, country, level, credit, location, longitude, latitude, addTime,charge)
+        values(#{clubId},#{clubName},#{country},#{level},#{charge},#{location},#{longitude},#{latitude},now(),#{charge})
     </insert>
 
     <insert id="addClubMember" parameterType="com.cn.meet.req.oracle.ClubMemberReq" useGeneratedKeys="true"

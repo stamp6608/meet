@@ -1,6 +1,7 @@
 package com.cn.meet.req.oracle;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @program: meet
@@ -29,7 +30,7 @@ public class ClubInfoReq extends BaseReq {
     private String country;
 
     //俱乐部创建时间
-    private Integer addTime;
+    private Date addTime;
     //俱乐部费用
     private BigDecimal charge;
 
@@ -66,11 +67,11 @@ public class ClubInfoReq extends BaseReq {
         this.charge = charge;
     }
 
-    public Integer getAddTime() {
+    public Date getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Integer addTime) {
+    public void setAddTime(Date addTime) {
         this.addTime = addTime;
     }
 

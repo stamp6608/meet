@@ -41,13 +41,22 @@ public class ClubController {
     private ClubService clubService;
 
 
-    /** 
-    * @Description: 俱乐部信息分页查询（根据俱乐部信用度排序）
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/5/15 
-    */ 
+    /**
+     * @api {POST} http://url/club/clubList  3.1俱乐部信息分页查询
+     * @apiVersion 1.0.0
+     * @apiGroup 3俱乐部
+     * @apiDescription 俱乐部信息分页查询（根据俱乐部信用度排序）
+     * @apiParam {String} page   页码
+     * @apiParam {String} pageSize 	 页数
+     * @apiSuccessExample {Object} 返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":[]
+     * }
+     * </b>
+     * 加密此json对象后返回
+     */
     @SecurityParameter
     @PostMapping("clubList")
     @ResponseBody
@@ -64,13 +73,22 @@ public class ClubController {
         return ResponseEntity.initSuccessResponse(clubs);
     }
 
-    /** 
-    * @Description: 根据俱乐部ID或者俱乐部名称查询俱乐部信息 (最多返回10条记录)
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/5/15 
-    */ 
+    /**
+     * @api {POST} http://url/club/fetchClubs  3.2根据俱乐部ID或者俱乐部名称查询俱乐部信息
+     * @apiVersion 1.0.0
+     * @apiGroup 3俱乐部
+     * @apiDescription 根据俱乐部ID或者俱乐部名称查询俱乐部信息 (最多返回10条记录)
+     * @apiParam {String} [clubId]   俱乐部ID
+     * @apiParam {String} [clubName] 俱乐部名称
+     * @apiSuccessExample {Object} 返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":[]
+     * }
+     * </b>
+     * 加密此json对象后返回
+     */
     @SecurityParameter
     @PostMapping("fetchClubs")
     @ResponseBody
@@ -83,13 +101,30 @@ public class ClubController {
     }
 
 
-    /** 
-    * @Description: 新增俱乐部
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/5/19 
-    */ 
+    /**
+     * @api {POST} http://url/club/addClub  3.3新增俱乐部
+     * @apiVersion 1.0.0
+     * @apiGroup 3俱乐部
+     * @apiDescription 新增俱乐部
+     * </b>
+     * @apiParam {Integer} userId    用户ID
+     * @apiParam {String} userName 	 创建人用户名
+     * @apiParam {String} clubId     俱乐部id 如(nfjfm88jj)
+     * @apiParam {String} clubName   俱乐部名称
+     * @apiParam {BigDecimal} longitude  经度
+     * @apiParam {BigDecimal} latitude   维度
+     * @apiParam {String} location      俱乐部地址
+     * @apiParam {String} level         俱乐部级别 (如"lev1"或 “lev2"等)
+     * @apiParam {String} country       国家
+     * @apiSuccessExample {Object}    返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":""
+     * }
+     * </b>
+     * 加密此json对象后返回
+     */
     @SecurityParameter
     @PostMapping("addClub")
     @ResponseBody
@@ -100,13 +135,22 @@ public class ClubController {
         return ResponseEntity.initResponse();
     }
 
-    /** 
-    * @Description: 俱乐部成员查询
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/5/19 
-    */ 
+
+    /**
+     * @api {POST} http://url/club/clubMembers  3.4俱乐部成员查询
+     * @apiVersion 1.0.0
+     * @apiGroup 3俱乐部
+     * @apiDescription 俱乐部成员查询
+     * @apiParam {String} clubId   俱乐部ID
+     * @apiSuccessExample {Object} 返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":[]
+     * }
+     * </b>
+     * 加密此json对象后返回
+     */
     @SecurityParameter
     @PostMapping("clubMembers")
     @ResponseBody
@@ -117,13 +161,25 @@ public class ClubController {
         return ResponseEntity.initSuccessResponse(clubs);
     }
 
-    /** 
-    * @Description: 加入俱乐部成员
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/5/19 
-    */ 
+    /**
+     * @api {POST} http://url/club/addMember  3.5 加入俱乐部成员
+     * @apiVersion 1.0.0
+     * @apiGroup 3俱乐部
+     * @apiDescription 加入俱乐部成员
+     * @apiParam {String} clubId     俱乐部ID
+     * @apiParam {Integer} userId    用户ID
+     * @apiParam {String} userName 	 用户名
+     * @apiParam {Integer} type     成员类型 0 管理员; 1 VIP; 2 红牌; 3 处; 4 小妹; 5 包养中; 6 普通
+     *
+     * @apiSuccessExample {Object} 返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":[]
+     * }
+     * </b>
+     * 加密此json对象后返回
+     */
     @SecurityParameter
     @PostMapping("addMember")
     @ResponseBody
@@ -134,13 +190,25 @@ public class ClubController {
         return ResponseEntity.initResponse();
     }
 
-    /** 
-    * @Description: 俱乐部成员类型设置 （0 管理员; 1 VIP; 2 红牌; 3 处; 4 小妹; 5 包养中; 6 普通）
-    * @Param: [request]
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/5/19 
-    */ 
+
+    /**
+     * @api {POST} http://url/club/setMember  3.6 俱乐部成员类型设置
+     * @apiVersion 1.0.0
+     * @apiGroup 3俱乐部
+     * @apiDescription 俱乐部成员类型设置
+     * @apiParam {String} clubId     俱乐部ID
+     * @apiParam {Integer} userId    用户ID
+     * @apiParam {Integer} type     成员类型 0 管理员; 1 VIP; 2 红牌; 3 处; 4 小妹; 5 包养中; 6 普通
+     *
+     * @apiSuccessExample {Object} 返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":[]
+     * }
+     * </b>
+     * 加密此json对象后返回
+     */
     @SecurityParameter
     @PostMapping("setMember")
     @ResponseBody
@@ -151,13 +219,23 @@ public class ClubController {
         return ResponseEntity.initResponse();
     }
 
-    /** 
-    * @Description: 踢出俱乐部成员
-    * @Param: [request] 
-    * @return: com.cn.meet.model.common.ResponseEntity 
-    * @Author: Stamp.M 
-    * @Date: 2019/5/19 
-    */ 
+    /**
+     * @api {POST} http://url/club/outMember  3.7 踢出俱乐部成员
+     * @apiVersion 1.0.0
+     * @apiGroup 3俱乐部
+     * @apiDescription 踢出俱乐部成员
+     * @apiParam {String} clubId     俱乐部ID
+     * @apiParam {Integer} userId    用户ID
+     *
+     * @apiSuccessExample {Object} 返回成功
+     * {
+     * "code":0,
+     * "message:"success",
+     * "data":[]
+     * }
+     * </b>
+     * 加密此json对象后返回
+     */
     @SecurityParameter
     @PostMapping("outMember")
     @ResponseBody
@@ -167,7 +245,6 @@ public class ClubController {
         clubService.removeClubMember(clubReq);
         return ResponseEntity.initResponse();
     }
-
 
 
 }
